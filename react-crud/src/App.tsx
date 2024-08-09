@@ -41,6 +41,7 @@ const MyComponent: React.FC = () => {
   const [data, setData] = useState<Data[]>([]);
   const [pregledIsOpen, setPregledIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [noResults, setNoResults] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<null | string>(null);
   const [error, setError] = useState<Error | null>(null);
   const [criteria, setCriteria] = useState<string>("");
@@ -51,16 +52,18 @@ const MyComponent: React.FC = () => {
     if (criteria === "") {
       return true;
     } else {
-      return (
-        item.Name.toLowerCase().includes(criteria.toLowerCase()) ||
-        item.Surname.toLowerCase().includes(criteria.toLowerCase())
-      );
+      return item.Name.toLowerCase().includes(criteria.toLowerCase());
     }
   });
 
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  useEffect(() => {
+    const noResultsCondition = filteredData.length === 0 && criteria !== "";
+    setNoResults(noResultsCondition);
+  }, [filteredData, criteria]);
 
   const handleSetCriteria = (criteria: string) => {
     setCriteria(criteria);
@@ -114,7 +117,11 @@ const MyComponent: React.FC = () => {
             value={criteria}
             onChange={handleSetCriteria}
           ></SearchFilter>
-
+          {noResults && (
+            <div style={{ textAlign: "center", margin: "20px 0" }}>
+              <h2>User not found!</h2>
+            </div>
+          )}
           {selectedItem !== null && pregledIsOpen && (
             <ViewUser
               data={
@@ -143,98 +150,96 @@ type PersonTableProps = {
   onChangeSelectedItem: (row: string) => void;
 };
 
-const PersonTable: React.FC<PersonTableProps> = ({
-  data,
-  selectedItem,
-  onChangeSelectedItem,
-}) => {
-  const navigate = useNavigate();
+const PersonTable: React.FC<PersonTableProps> = React.memo(
+  ({ data, selectedItem, onChangeSelectedItem }) => {
+    const navigate = useNavigate();
 
-  const handleCreateClick = () => {
-    navigate("create");
-  };
-  return (
-    <div style={{ maxWidth: "fit-content", margin: "auto" }}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Button
-          style={{ marginTop: "15px" }}
-          appearance="primary"
-          onClick={handleCreateClick}
+    const handleCreateClick = () => {
+      navigate("create");
+    };
+    return (
+      <div style={{ maxWidth: "fit-content", margin: "auto" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
-          Add User
-        </Button>
+          <Button
+            style={{ marginTop: "15px" }}
+            appearance="primary"
+            onClick={handleCreateClick}
+          >
+            Add User
+          </Button>
+        </div>
+        <Table>
+          <TableHeader style={{ fontSize: "20px" }}>
+            <TableRow>
+              <TableHeaderCell style={{ textAlign: "center" }}>
+                <strong>ID</strong>
+              </TableHeaderCell>
+              <TableHeaderCell style={{ textAlign: "center" }}>
+                <strong>Name</strong>
+              </TableHeaderCell>
+              <TableHeaderCell style={{ textAlign: "center" }}>
+                <strong>Surname</strong>
+              </TableHeaderCell>
+              <TableHeaderCell style={{ textAlign: "center" }}>
+                <strong>User Type</strong>
+              </TableHeaderCell>
+              <TableHeaderCell style={{ textAlign: "center" }}>
+                <strong>Created Date</strong>
+              </TableHeaderCell>
+              <TableHeaderCell style={{ textAlign: "center" }}>
+                <strong>City</strong>
+              </TableHeaderCell>
+              <TableHeaderCell style={{ textAlign: "center" }}>
+                <strong>Address</strong>
+              </TableHeaderCell>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map(
+              ({ id, Name, Surname, UserType, CreatedDate, City, Address }) => (
+                <TableRow
+                  key={id}
+                  onClick={() => onChangeSelectedItem(id)}
+                  style={{
+                    backgroundColor: id === selectedItem ? "#DDD" : "#FFF",
+                  }}
+                >
+                  <TableCell key={id}>
+                    <TableCellLayout>{id}</TableCellLayout>
+                  </TableCell>
+                  <TableCell key={id}>
+                    <TableCellLayout>{Name}</TableCellLayout>
+                  </TableCell>
+                  <TableCell key={id}>
+                    <TableCellLayout>{Surname}</TableCellLayout>
+                  </TableCell>
+                  <TableCell key={id}>
+                    <TableCellLayout>{UserType}</TableCellLayout>
+                  </TableCell>
+                  <TableCell key={id}>
+                    <TableCellLayout>{CreatedDate}</TableCellLayout>
+                  </TableCell>
+                  <TableCell key={id}>
+                    <TableCellLayout>{City}</TableCellLayout>
+                  </TableCell>
+                  <TableCell key={id}>
+                    <TableCellLayout>{Address}</TableCellLayout>
+                  </TableCell>
+                </TableRow>
+              )
+            )}
+          </TableBody>
+        </Table>
       </div>
-      <Table>
-        <TableHeader style={{ fontSize: "20px" }}>
-          <TableRow>
-            <TableHeaderCell style={{ textAlign: "center" }}>
-              <strong>ID</strong>
-            </TableHeaderCell>
-            <TableHeaderCell style={{ textAlign: "center" }}>
-              <strong>Name</strong>
-            </TableHeaderCell>
-            <TableHeaderCell style={{ textAlign: "center" }}>
-              <strong>Surname</strong>
-            </TableHeaderCell>
-            <TableHeaderCell style={{ textAlign: "center" }}>
-              <strong>User Type</strong>
-            </TableHeaderCell>
-            <TableHeaderCell style={{ textAlign: "center" }}>
-              <strong>Created Date</strong>
-            </TableHeaderCell>
-            <TableHeaderCell style={{ textAlign: "center" }}>
-              <strong>City</strong>
-            </TableHeaderCell>
-            <TableHeaderCell style={{ textAlign: "center" }}>
-              <strong>Address</strong>
-            </TableHeaderCell>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data.map(
-            ({ id, Name, Surname, UserType, CreatedDate, City, Address }) => (
-              <TableRow
-                key={Number(id)}
-                onClick={() => onChangeSelectedItem(id)}
-                style={{
-                  backgroundColor: id === selectedItem ? "#DDD" : "#FFF",
-                }}
-              >
-                <TableCell>
-                  <TableCellLayout>{id}</TableCellLayout>
-                </TableCell>
-                <TableCell>
-                  <TableCellLayout>{Name}</TableCellLayout>
-                </TableCell>
-                <TableCell>
-                  <TableCellLayout>{Surname}</TableCellLayout>
-                </TableCell>
-                <TableCell>
-                  <TableCellLayout>{UserType}</TableCellLayout>
-                </TableCell>
-                <TableCell>
-                  <TableCellLayout>{CreatedDate}</TableCellLayout>
-                </TableCell>
-                <TableCell>
-                  <TableCellLayout>{City}</TableCellLayout>
-                </TableCell>
-                <TableCell>
-                  <TableCellLayout>{Address}</TableCellLayout>
-                </TableCell>
-              </TableRow>
-            )
-          )}
-        </TableBody>
-      </Table>
-    </div>
-  );
-};
+    );
+  }
+);
 
 export default MyComponent;
 
