@@ -29,14 +29,6 @@ export const CreateUserForm: React.FC = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
   return (
     <>
       {isLoading && <Spinner label="Creating user..." size="large" />}
@@ -55,7 +47,9 @@ export const CreateUserForm: React.FC = () => {
             type="text"
             name="Name"
             value={formData.Name}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
           />
           <br />
           <br />
@@ -64,7 +58,9 @@ export const CreateUserForm: React.FC = () => {
             type="text"
             name="Surname"
             value={formData.Surname}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
           />
           <br />
           <br />
@@ -73,7 +69,9 @@ export const CreateUserForm: React.FC = () => {
             type="text"
             name="UserType"
             value={formData.UserType}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
           />
           <br />
           <br />
@@ -82,7 +80,9 @@ export const CreateUserForm: React.FC = () => {
             type="date"
             name="CreatedDate"
             value={formData.CreatedDate}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
           />
           <br />
           <br />
@@ -91,7 +91,9 @@ export const CreateUserForm: React.FC = () => {
             type="text"
             name="City"
             value={formData.City}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
           />
           <br />
           <br />
@@ -100,7 +102,9 @@ export const CreateUserForm: React.FC = () => {
             type="text"
             name="Address"
             value={formData.Address}
-            onChange={handleChange}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
           />
           <br />
           <br />

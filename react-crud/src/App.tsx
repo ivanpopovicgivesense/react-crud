@@ -51,7 +51,10 @@ const MyComponent: React.FC = () => {
     if (criteria === "") {
       return true;
     } else {
-      return item.Name.toLowerCase().includes(criteria.toLowerCase());
+      return (
+        item.Name.toLowerCase().includes(criteria.toLowerCase()) ||
+        item.Surname.toLowerCase().includes(criteria.toLowerCase())
+      );
     }
   });
 
@@ -114,7 +117,9 @@ const MyComponent: React.FC = () => {
 
           {selectedItem !== null && pregledIsOpen && (
             <ViewUser
-              data={data.find((item) => item.id === selectedItem)}
+              data={
+                data.find((item) => item.id === selectedItem) || ({} as Data)
+              }
               onDeleteUser={() => deleteUser(selectedItem)}
               onEditUser={handleEditUser}
               setSelectedItem={setSelectedItem}
@@ -246,6 +251,9 @@ const ViewUser: React.FC<ViewUserProps> = ({
   setSelectedItem,
   onEditUser,
 }) => {
+  if (!data) {
+    return null;
+  }
   return (
     <>
       <Table>

@@ -4,9 +4,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 type UserData = {
-  id: number;
-  username: string;
-  email: string;
+  id: string;
+  Name: string;
+  Surname: string;
+  UserType: string;
+  CreatedDate: string;
+  City: string;
+  Address: string;
 };
 
 export const UpdateUserForm: React.FC = () => {
@@ -34,13 +38,6 @@ export const UpdateUserForm: React.FC = () => {
     setIsLoading(true);
     axios
       .put(`http://localhost:3000/person/${userId}`, formData)
-      .then(() =>
-        console.log(
-          `User updated: New username: ${JSON.stringify(
-            formData.username
-          )}, New email: ${JSON.stringify(formData.email)}`
-        )
-      )
       .then(() => navigate("/"))
       .catch((err) => setError(err.message))
       .finally(() => setIsLoading(false));
@@ -59,22 +56,66 @@ export const UpdateUserForm: React.FC = () => {
           }}
           onSubmit={handleSubmit}
         >
-          <Label htmlFor="username">Username:</Label>
+          <Label htmlFor="name">Name:</Label>
           <Input
             type="text"
-            name="username"
-            value={formData.username}
+            name="Name"
+            value={formData.Name}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
           />
           <br />
           <br />
-          <Label htmlFor="email">Email:</Label>
+          <Label htmlFor="surname">Surname:</Label>
           <Input
-            type="email"
-            name="email"
-            value={formData.email}
+            type="text"
+            name="Surname"
+            value={formData.Surname}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
+          />
+          <br />
+          <br />
+          <Label htmlFor="userType">User Type:</Label>
+          <Input
+            type="text"
+            name="UserType"
+            value={formData.UserType}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
+          />
+          <br />
+          <br />
+          <Label htmlFor="date">Created Date:</Label>
+          <Input
+            type="date"
+            name="CreatedDate"
+            value={formData.CreatedDate}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
+          />
+          <br />
+          <br />
+          <Label htmlFor="city">City:</Label>
+          <Input
+            type="text"
+            name="City"
+            value={formData.City}
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
+          />
+          <br />
+          <br />
+          <Label htmlFor="address">Address:</Label>
+          <Input
+            type="text"
+            name="Address"
+            value={formData.Address}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
