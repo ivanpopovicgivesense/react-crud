@@ -18,6 +18,7 @@ import {
   DialogSurface,
   DialogBody,
 } from "@fluentui/react-components";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 import axios from "axios";
 
@@ -38,13 +39,34 @@ type Error = {
 
 const App: React.FC = () => {
   const [data, setData] = useState<Data[]>([]);
+  const [pregledIsOpen, setPregledIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<null | number>(null);
   const [error, setError] = useState<Error | null>(null);
+  const [criteria, setCriteria] = useState<string>("");
+
+  const navigate = useNavigate();
+
+  const filteredData = data.filter((item) => {
+    if (criteria === "") {
+      return true;
+    } else {
+      return item.Name.toLowerCase().includes(criteria.toLowerCase());
+    }
+  });
 
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  const handleSetCriteria = (criteria: string) => {
+    setCriteria(criteria);
+  };
+
+  const handleSetSelectedItem = (item: number) => {
+    setSelectedItem(item === selectedItem ? null : item);
+    setPregledIsOpen(true);
+  };
 
   const fetchUsers = () => {
     setIsLoading(true);
@@ -55,16 +77,54 @@ const App: React.FC = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const handleSetSelectedItem = (item: number) => {
-    setSelectedItem(item === selectedItem ? null : item);
+  const deleteUser = (id: number) => {
+    if (
+      window.confirm(
+        `Are you sure you want to delete user with an id of ${id}?`
+      )
+    ) {
+      axios
+        .delete(`http://localhost:3000/person/${id}`)
+        .then(() => {
+          setData(data.filter((user) => user.Id !== id));
+          console.log(`User with an id of ${id} was successfully deleted!`);
+        })
+        .catch((error) => console.error(`Error deleting user: ${error}`))
+        .finally(() => fetchUsers());
+    }
   };
+
   return (
     <>
-      <PersonTable
-        data={data}
-        selectedItem={selectedItem}
-        onChangeSelectedItem={(item) => handleSetSelectedItem(item)}
-      ></PersonTable>
+      {isLoading && (
+        <Spinner style={{ marginTop: "300px" }} label="Fetching users..." />
+      )}
+      {!isLoading && !error && (
+        <>
+          <SearchFilter
+            value={criteria}
+            onChange={handleSetCriteria}
+          ></SearchFilter>
+
+          {selectedItem !== null && pregledIsOpen && (
+            <ViewUser
+              data={data.find((item) => item.Id === selectedItem)}
+              onDeleteUser={() => deleteUser(selectedItem)}
+              onEditUser={(user: Data) => {
+                navigate(`/update/${user.Id}`);
+                setPregledIsOpen(false);
+              }}
+              setSelectedItem={setSelectedItem}
+            />
+          )}
+          <PersonTable
+            data={filteredData}
+            selectedItem={selectedItem}
+            onChangeSelectedItem={(item) => handleSetSelectedItem(item)}
+          />
+        </>
+      )}
+      {error && <ErrorMessage message={error} />}
     </>
   );
 };
@@ -145,3 +205,132 @@ const PersonTable: React.FC<PersonTableProps> = ({
 };
 
 export default App;
+
+type ViewUserProps = {
+  data: Data | undefined;
+  onDeleteUser: (id: number) => void;
+  setSelectedItem: (selectedItem: number | null) => void;
+  onEditUser: (user: Data) => void;
+};
+
+const ViewUser: React.FC<ViewUserProps> = ({
+  data,
+  onDeleteUser,
+  setSelectedItem,
+  onEditUser,
+}) => {
+  if (!data) {
+    return <p>User data not found.</p>;
+  }
+
+  return (
+    <>
+      <Table>
+        <TableRow>
+          <TableCell style={{ textAlign: "center" }}>
+            <Button
+              style={{ backgroundColor: "#E50000" }}
+              appearance="primary"
+              onClick={() => onDeleteUser(data.Id)}
+            >
+              Delete
+            </Button>
+          </TableCell>
+          <TableCell style={{ textAlign: "center" }}>
+            <Button
+              style={{ backgroundColor: "#FFAC1C" }}
+              appearance="primary"
+              onClick={() => onEditUser(data)}
+            >
+              Update
+            </Button>
+          </TableCell>
+
+          <TableCell style={{ textAlign: "center" }}>
+            <Dialog modalType="alert">
+              <DialogTrigger>
+                <Button
+                  style={{ backgroundColor: "#228B22" }}
+                  appearance="primary"
+                >
+                  View
+                </Button>
+              </DialogTrigger>
+              <DialogSurface>
+                <DialogBody>
+                  <DialogTitle>User Information</DialogTitle>
+                  <DialogContent>
+                    <h3>ID: {data.Id}</h3>
+                    <h3>Name: {data.Name}</h3>
+                    <h3>Surname: {data.Surname}</h3>
+                    <h3>User Type: {data.UserType}</h3>
+                    <h3>Created Date: {data.CreatedDate}</h3>
+                    <h3>City: {data.City}</h3>
+                    <h3>Address: {data.Address}</h3>
+                  </DialogContent>
+                  <DialogActions>
+                    <DialogTrigger>
+                      <Button appearance="secondary">Close</Button>
+                    </DialogTrigger>
+                  </DialogActions>
+                </DialogBody>
+              </DialogSurface>
+            </Dialog>
+          </TableCell>
+          <TableCell style={{ textAlign: "center" }}>
+            <Button
+              appearance="secondary"
+              onClick={() => setSelectedItem(null)}
+            >
+              Cancel
+            </Button>
+          </TableCell>
+        </TableRow>
+      </Table>
+    </>
+  );
+};
+
+type SearchFilterProps = {
+  onChange: (value: string) => void;
+  value: string;
+};
+
+const SearchFilter: React.FC<SearchFilterProps> = ({ onChange, value }) => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Input
+        value={value || ""}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="Search..."
+        style={{ padding: "5px", margin: "25px 0px 25px 5px" }}
+      ></Input>
+    </div>
+  );
+};
+
+type ErrorMessageProps = {
+  message: string | Error;
+};
+
+const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
+  const errorMessage =
+    typeof message === "string"
+      ? message
+      : message.status
+      ? `${message.message} (Status: ${message.status})`
+      : message.message;
+
+  return (
+    <div style={{ color: "#e50000", margin: "20px 0" }}>
+      <h2>Error:</h2>
+      <p>{errorMessage}</p>
+    </div>
+  );
+};
