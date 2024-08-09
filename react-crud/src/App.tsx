@@ -23,7 +23,7 @@ import "./App.css";
 import axios from "axios";
 
 type Data = {
-  Id: number;
+  id: string;
   Name: string;
   Surname: string;
   UserType: string;
@@ -37,11 +37,11 @@ type Error = {
   status?: number;
 };
 
-const App: React.FC = () => {
+const MyComponent: React.FC = () => {
   const [data, setData] = useState<Data[]>([]);
   const [pregledIsOpen, setPregledIsOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [selectedItem, setSelectedItem] = useState<null | number>(null);
+  const [selectedItem, setSelectedItem] = useState<null | string>(null);
   const [error, setError] = useState<Error | null>(null);
   const [criteria, setCriteria] = useState<string>("");
 
@@ -63,9 +63,15 @@ const App: React.FC = () => {
     setCriteria(criteria);
   };
 
-  const handleSetSelectedItem = (item: number) => {
+  const handleSetSelectedItem = (item: string) => {
     setSelectedItem(item === selectedItem ? null : item);
     setPregledIsOpen(true);
+  };
+
+  const handleEditUser = (user: Data) => {
+    console.log(`Navigating to /update/${user.id}`);
+    navigate(`/update/${user.id}`);
+    setPregledIsOpen(false);
   };
 
   const fetchUsers = () => {
@@ -77,7 +83,7 @@ const App: React.FC = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const deleteUser = (id: number) => {
+  const deleteUser = (id: string) => {
     if (
       window.confirm(
         `Are you sure you want to delete user with an id of ${id}?`
@@ -86,7 +92,7 @@ const App: React.FC = () => {
       axios
         .delete(`http://localhost:3000/person/${id}`)
         .then(() => {
-          setData(data.filter((user) => user.Id !== id));
+          setData(data.filter((user) => user.id !== id));
           console.log(`User with an id of ${id} was successfully deleted!`);
         })
         .catch((error) => console.error(`Error deleting user: ${error}`))
@@ -108,12 +114,9 @@ const App: React.FC = () => {
 
           {selectedItem !== null && pregledIsOpen && (
             <ViewUser
-              data={data.find((item) => item.Id === selectedItem)}
+              data={data.find((item) => item.id === selectedItem)}
               onDeleteUser={() => deleteUser(selectedItem)}
-              onEditUser={(user: Data) => {
-                navigate(`/update/${user.Id}`);
-                setPregledIsOpen(false);
-              }}
+              onEditUser={handleEditUser}
               setSelectedItem={setSelectedItem}
             />
           )}
@@ -131,8 +134,8 @@ const App: React.FC = () => {
 
 type PersonTableProps = {
   data: Data[];
-  selectedItem: null | number;
-  onChangeSelectedItem: (row: number) => void;
+  selectedItem: null | string;
+  onChangeSelectedItem: (row: string) => void;
 };
 
 const PersonTable: React.FC<PersonTableProps> = ({
@@ -140,76 +143,100 @@ const PersonTable: React.FC<PersonTableProps> = ({
   selectedItem,
   onChangeSelectedItem,
 }) => {
+  const navigate = useNavigate();
+
+  const handleCreateClick = () => {
+    navigate("create");
+  };
   return (
-    <Table>
-      <TableHeader style={{ fontSize: "20px" }}>
-        <TableRow>
-          <TableHeaderCell style={{ textAlign: "center" }}>
-            <strong>ID</strong>
-          </TableHeaderCell>
-          <TableHeaderCell style={{ textAlign: "center" }}>
-            <strong>Name</strong>
-          </TableHeaderCell>
-          <TableHeaderCell style={{ textAlign: "center" }}>
-            <strong>Surname</strong>
-          </TableHeaderCell>
-          <TableHeaderCell style={{ textAlign: "center" }}>
-            <strong>User Type</strong>
-          </TableHeaderCell>
-          <TableHeaderCell style={{ textAlign: "center" }}>
-            <strong>Created Date</strong>
-          </TableHeaderCell>
-          <TableHeaderCell style={{ textAlign: "center" }}>
-            <strong>City</strong>
-          </TableHeaderCell>
-          <TableHeaderCell style={{ textAlign: "center" }}>
-            <strong>Address</strong>
-          </TableHeaderCell>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map(
-          ({ Id, Name, Surname, UserType, CreatedDate, City, Address }) => (
-            <TableRow
-              key={Id}
-              onClick={() => onChangeSelectedItem(Id)}
-              style={{ backgroundColor: Id === selectedItem ? "#DDD" : "#FFF" }}
-            >
-              <TableCell>
-                <TableCellLayout>{Id}</TableCellLayout>
-              </TableCell>
-              <TableCell>
-                <TableCellLayout>{Name}</TableCellLayout>
-              </TableCell>
-              <TableCell>
-                <TableCellLayout>{Surname}</TableCellLayout>
-              </TableCell>
-              <TableCell>
-                <TableCellLayout>{UserType}</TableCellLayout>
-              </TableCell>
-              <TableCell>
-                <TableCellLayout>{CreatedDate}</TableCellLayout>
-              </TableCell>
-              <TableCell>
-                <TableCellLayout>{City}</TableCellLayout>
-              </TableCell>
-              <TableCell>
-                <TableCellLayout>{Address}</TableCellLayout>
-              </TableCell>
-            </TableRow>
-          )
-        )}
-      </TableBody>
-    </Table>
+    <div style={{ maxWidth: "fit-content", margin: "auto" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Button
+          style={{ marginTop: "15px" }}
+          appearance="primary"
+          onClick={handleCreateClick}
+        >
+          Add User
+        </Button>
+      </div>
+      <Table>
+        <TableHeader style={{ fontSize: "20px" }}>
+          <TableRow>
+            <TableHeaderCell style={{ textAlign: "center" }}>
+              <strong>ID</strong>
+            </TableHeaderCell>
+            <TableHeaderCell style={{ textAlign: "center" }}>
+              <strong>Name</strong>
+            </TableHeaderCell>
+            <TableHeaderCell style={{ textAlign: "center" }}>
+              <strong>Surname</strong>
+            </TableHeaderCell>
+            <TableHeaderCell style={{ textAlign: "center" }}>
+              <strong>User Type</strong>
+            </TableHeaderCell>
+            <TableHeaderCell style={{ textAlign: "center" }}>
+              <strong>Created Date</strong>
+            </TableHeaderCell>
+            <TableHeaderCell style={{ textAlign: "center" }}>
+              <strong>City</strong>
+            </TableHeaderCell>
+            <TableHeaderCell style={{ textAlign: "center" }}>
+              <strong>Address</strong>
+            </TableHeaderCell>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.map(
+            ({ id, Name, Surname, UserType, CreatedDate, City, Address }) => (
+              <TableRow
+                key={Number(id)}
+                onClick={() => onChangeSelectedItem(id)}
+                style={{
+                  backgroundColor: id === selectedItem ? "#DDD" : "#FFF",
+                }}
+              >
+                <TableCell>
+                  <TableCellLayout>{id}</TableCellLayout>
+                </TableCell>
+                <TableCell>
+                  <TableCellLayout>{Name}</TableCellLayout>
+                </TableCell>
+                <TableCell>
+                  <TableCellLayout>{Surname}</TableCellLayout>
+                </TableCell>
+                <TableCell>
+                  <TableCellLayout>{UserType}</TableCellLayout>
+                </TableCell>
+                <TableCell>
+                  <TableCellLayout>{CreatedDate}</TableCellLayout>
+                </TableCell>
+                <TableCell>
+                  <TableCellLayout>{City}</TableCellLayout>
+                </TableCell>
+                <TableCell>
+                  <TableCellLayout>{Address}</TableCellLayout>
+                </TableCell>
+              </TableRow>
+            )
+          )}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 
-export default App;
+export default MyComponent;
 
 type ViewUserProps = {
-  data: Data | undefined;
-  onDeleteUser: (id: number) => void;
-  setSelectedItem: (selectedItem: number | null) => void;
+  data: Data;
+  onDeleteUser: (id: string) => void;
+  setSelectedItem: (selectedItem: string | null) => void;
   onEditUser: (user: Data) => void;
 };
 
@@ -219,10 +246,6 @@ const ViewUser: React.FC<ViewUserProps> = ({
   setSelectedItem,
   onEditUser,
 }) => {
-  if (!data) {
-    return <p>User data not found.</p>;
-  }
-
   return (
     <>
       <Table>
@@ -231,7 +254,7 @@ const ViewUser: React.FC<ViewUserProps> = ({
             <Button
               style={{ backgroundColor: "#E50000" }}
               appearance="primary"
-              onClick={() => onDeleteUser(data.Id)}
+              onClick={() => onDeleteUser(data.id)}
             >
               Delete
             </Button>
@@ -260,7 +283,7 @@ const ViewUser: React.FC<ViewUserProps> = ({
                 <DialogBody>
                   <DialogTitle>User Information</DialogTitle>
                   <DialogContent>
-                    <h3>ID: {data.Id}</h3>
+                    <h3>ID: {data.id}</h3>
                     <h3>Name: {data.Name}</h3>
                     <h3>Surname: {data.Surname}</h3>
                     <h3>User Type: {data.UserType}</h3>

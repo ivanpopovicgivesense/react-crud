@@ -1,13 +1,30 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import { FluentProvider, webLightTheme } from "@fluentui/react-components";
+import { createRoot } from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import App from "./App";
+import { App } from "./router";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+const container = document.getElementById("root")!;
+const root = createRoot(container);
+
+const router = createBrowserRouter(
+  [
+    {
+      path: "/*",
+      element: <App />,
+    },
+  ],
+  {
+    basename: process.env.basename,
+  }
 );
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+
+const Element = () => {
+  return (
+    <FluentProvider style={{ height: "100%" }} theme={webLightTheme}>
+      <RouterProvider router={router} />
+    </FluentProvider>
+  );
+};
+root.render(<Element />);
