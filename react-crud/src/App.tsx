@@ -82,21 +82,15 @@ const MyComponent: React.FC = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const deleteUser = (id: string) => {
-    if (
-      window.confirm(
-        `Are you sure you want to delete user with an id of ${id}?`
-      )
-    ) {
-      axios
-        .delete(`http://localhost:3000/person/${id}`)
-        .then(() => {
-          setData(data.filter((user) => user.id !== id));
-          console.log(`User with an id of ${id} was successfully deleted!`);
-        })
-        .catch((error) => console.error(`Error deleting user: ${error}`))
-        .finally(() => fetchUsers());
-    }
+  const deleteUser = (id: string | null) => {
+    axios
+      .delete(`http://localhost:3000/person/${id}`)
+      .then(() => {
+        setData(data.filter((user) => user.id !== id));
+        console.log(`User with an id of ${id} was successfully deleted!`);
+      })
+      .catch((error) => console.error(`Error deleting user: ${error}`))
+      .finally(() => fetchUsers());
   };
 
   return (
@@ -120,16 +114,15 @@ const MyComponent: React.FC = () => {
               <h2>User not found!</h2>
             </div>
           )}
-          {selectedItem !== null && pregledIsOpen && (
-            <ViewUser
-              data={
-                data.find((item) => item.id === selectedItem) || ({} as Data)
-              }
-              onDeleteUser={() => deleteUser(selectedItem)}
-              onEditUser={handleEditUser}
-              setSelectedItem={setSelectedItem}
-            />
-          )}
+
+          <ViewUser
+            data={data.find((item) => item.id === selectedItem) || ({} as Data)}
+            onDeleteUser={() => deleteUser(selectedItem)}
+            onEditUser={handleEditUser}
+            setSelectedItem={setSelectedItem}
+            selectedItem={selectedItem}
+            pregledIsOpen={pregledIsOpen}
+          />
           <PersonTable
             data={filteredData}
             selectedItem={selectedItem}

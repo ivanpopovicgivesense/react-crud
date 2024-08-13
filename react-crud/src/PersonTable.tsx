@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Button,
   TableBody,
   TableCell,
   TableRow,
@@ -9,7 +8,6 @@ import {
   TableHeaderCell,
   TableCellLayout,
 } from "@fluentui/react-components";
-import { useNavigate } from "react-router-dom";
 
 type Data = {
   id: string;
@@ -29,28 +27,9 @@ type PersonTableProps = {
 
 const PersonTable: React.FC<PersonTableProps> = React.memo(
   ({ data, selectedItem, onChangeSelectedItem }) => {
-    const navigate = useNavigate();
-
-    const handleCreateClick = () => {
-      navigate("create");
-    };
     return (
-      <div style={{ maxWidth: "fit-content", margin: "auto" }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Button
-            style={{ marginTop: "15px" }}
-            appearance="primary"
-            onClick={handleCreateClick}
-          >
-            Add User
-          </Button>
-        </div>
+      <>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}></div>
         <Table>
           <TableHeader style={{ fontSize: "20px" }}>
             <TableRow>
@@ -87,25 +66,25 @@ const PersonTable: React.FC<PersonTableProps> = React.memo(
                     backgroundColor: id === selectedItem ? "#DDD" : "#FFF",
                   }}
                 >
-                  <TableCell key={id}>
+                  <TableCell>
                     <TableCellLayout>{id}</TableCellLayout>
                   </TableCell>
-                  <TableCell key={id}>
+                  <TableCell>
                     <TableCellLayout>{Name}</TableCellLayout>
                   </TableCell>
-                  <TableCell key={id}>
+                  <TableCell>
                     <TableCellLayout>{Surname}</TableCellLayout>
                   </TableCell>
-                  <TableCell key={id}>
+                  <TableCell>
                     <TableCellLayout>{UserType}</TableCellLayout>
                   </TableCell>
-                  <TableCell key={id}>
+                  <TableCell>
                     <TableCellLayout>{CreatedDate}</TableCellLayout>
                   </TableCell>
-                  <TableCell key={id}>
+                  <TableCell>
                     <TableCellLayout>{City}</TableCellLayout>
                   </TableCell>
-                  <TableCell key={id}>
+                  <TableCell>
                     <TableCellLayout>{Address}</TableCellLayout>
                   </TableCell>
                 </TableRow>
@@ -113,7 +92,7 @@ const PersonTable: React.FC<PersonTableProps> = React.memo(
             )}
           </TableBody>
         </Table>
-      </div>
+      </>
     );
   }
 );

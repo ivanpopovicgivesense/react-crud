@@ -1,5 +1,5 @@
 import React from "react";
-import { Select, Label } from "@fluentui/react-components";
+import { Select } from "@fluentui/react-components";
 type Data = {
   id: string;
   Name: string;
@@ -29,10 +29,8 @@ const FilterByUserType: React.FC<FilterByUserTypeProps> = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        flexDirection: "column",
       }}
     >
-      <Label>Filter by User Type</Label>
       <Select
         onChange={(e) => onChange(e.target.value)}
         value={selectedUserType}
