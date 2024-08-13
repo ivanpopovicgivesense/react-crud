@@ -8,7 +8,7 @@ Clone the Repository
 First, clone the repository to your local machine:
 
 ```
-git clone https://github.com/yourusername/your-repository-name.git
+git clone https://github.com/ivanpopovicgivesense/react-crud.git
 ```
 
 Navigate into the project directory:
