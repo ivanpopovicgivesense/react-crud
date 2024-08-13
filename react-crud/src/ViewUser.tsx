@@ -12,7 +12,6 @@ import {
   DialogSurface,
   DialogBody,
 } from "@fluentui/react-components";
-import "./App.css";
 
 type Data = {
   id: string;

@@ -10,7 +10,6 @@ import {
   TableCellLayout,
 } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
-import "./App.css";
 
 type Data = {
   id: string;

@@ -2,7 +2,6 @@ import React from "react";
 import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./index.css";
 import { App } from "./router";
 
 const container = document.getElementById("root")!;

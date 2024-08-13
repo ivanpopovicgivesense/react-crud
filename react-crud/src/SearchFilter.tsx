@@ -1,6 +1,5 @@
 import React from "react";
 import { Input } from "@fluentui/react-components";
-import "./App.css";
 
 type SearchFilterProps = {
   onChange: (value: string) => void;

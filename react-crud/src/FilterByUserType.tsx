@@ -1,7 +1,5 @@
 import React from "react";
 import { Select, Label } from "@fluentui/react-components";
-import "./App.css";
-
 type Data = {
   id: string;
   Name: string;
