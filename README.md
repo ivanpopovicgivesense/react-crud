@@ -1,10 +1,12 @@
-
-Getting Started
+## Getting Started
+***
 
 Follow these instructions to get a copy of the project up and running on your local machine.
 
 
-Clone the Repository
+***
+## Clone the Repository
+
 First, clone the repository to your local machine:
 
 ```
@@ -18,7 +20,9 @@ cd your-repository-name
 ```
 
 
-Install Dependencies
+***
+## Install Dependencies
+
 Install the required dependencies using npm or Yarn:
 
 ```
@@ -30,7 +34,9 @@ yarn install
 ```
 
 
-Set Up JSON Server
+***
+## Set Up JSON Server
+
 Install JSON Server globally if you haven’t already:
 
 ```
@@ -69,7 +75,9 @@ Create a db.json file in the root directory of your project with the following c
 ```
 
 
-Start JSON Server
+***
+## Start JSON Server
+
 Run the JSON Server to serve the mock API:
 
 ```
@@ -78,7 +86,9 @@ json-server --watch db.json --port 3000
 This command will start the JSON Server on port 3000.
 
 
-Start the React Application
+***
+## Start the React Application
+
 In a separate terminal window, start the React application:
 
 ```
