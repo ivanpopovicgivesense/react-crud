@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
+  Dropdown,
+  Option,
   Spinner,
   Button,
   TableBody,
@@ -17,6 +19,7 @@ import {
   DialogTrigger,
   DialogSurface,
   DialogBody,
+  Label,
 } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
@@ -45,15 +48,17 @@ const MyComponent: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<null | string>(null);
   const [error, setError] = useState<Error | null>(null);
   const [criteria, setCriteria] = useState<string>("");
+  const [selectedUserType, setSelectedUserType] = useState<string>("");
 
   const navigate = useNavigate();
 
   const filteredData = data.filter((item) => {
-    if (criteria === "") {
-      return true;
-    } else {
-      return item.Name.toLowerCase().includes(criteria.toLowerCase());
-    }
+    const matchesName =
+      criteria === "" ||
+      item.Name.toLowerCase().startsWith(criteria.toLowerCase());
+    const matchesUserType =
+      selectedUserType === "" || item.UserType === selectedUserType;
+    return matchesName && matchesUserType;
   });
 
   useEffect(() => {
@@ -61,12 +66,17 @@ const MyComponent: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const noResultsCondition = filteredData.length === 0 && criteria !== "";
+    const noResultsCondition =
+      filteredData.length === 0 && (criteria !== "" || selectedUserType !== "");
     setNoResults(noResultsCondition);
-  }, [filteredData, criteria]);
+  }, [filteredData, selectedUserType, criteria]);
 
   const handleSetCriteria = (criteria: string) => {
     setCriteria(criteria);
+  };
+
+  const handleUserTypeChange = (value: string) => {
+    setSelectedUserType(value);
   };
 
   const handleSetSelectedItem = (item: string) => {
@@ -113,6 +123,11 @@ const MyComponent: React.FC = () => {
       )}
       {!isLoading && !error && (
         <>
+          <FilterByUserType
+            data={data}
+            selectedUserType={selectedUserType}
+            onChange={handleUserTypeChange}
+          ></FilterByUserType>
           <SearchFilter
             value={criteria}
             onChange={handleSetCriteria}
@@ -347,6 +362,42 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onChange, value }) => {
         placeholder="Search..."
         style={{ padding: "5px", margin: "25px 0px 25px 5px" }}
       ></Input>
+    </div>
+  );
+};
+
+type FilterByUserTypeProps = {
+  data: Data[];
+  selectedUserType: string;
+  onChange: (value: string) => void;
+};
+
+const FilterByUserType: React.FC<FilterByUserTypeProps> = ({
+  data,
+  selectedUserType,
+  onChange,
+}) => {
+  const userTypes = Array.from(new Set(data.map((item) => item.UserType)));
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <select
+        onChange={(e) => onChange(e.target.value)}
+        value={selectedUserType}
+      >
+        <option value="">All</option>
+        {userTypes.map((userType) => (
+          <option key={userType} value={userType}>
+            {userType}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };
