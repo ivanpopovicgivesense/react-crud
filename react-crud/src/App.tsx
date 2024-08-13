@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Dropdown,
-  Option,
   Spinner,
   Button,
   TableBody,
@@ -19,6 +17,7 @@ import {
   DialogTrigger,
   DialogSurface,
   DialogBody,
+  Select,
   Label,
 } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
@@ -385,9 +384,11 @@ const FilterByUserType: React.FC<FilterByUserTypeProps> = ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "column",
       }}
     >
-      <select
+      <Label>Filter by User Type</Label>
+      <Select
         onChange={(e) => onChange(e.target.value)}
         value={selectedUserType}
       >
@@ -397,7 +398,7 @@ const FilterByUserType: React.FC<FilterByUserTypeProps> = ({
             {userType}
           </option>
         ))}
-      </select>
+      </Select>
     </div>
   );
 };
