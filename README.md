@@ -13,15 +13,16 @@ First, clone the repository to your local machine:
 git clone https://github.com/ivanpopovicgivesense/react-crud.git
 ```
 
+
+***
+## Install Dependencies
+
+
 Navigate into the project directory:
 
 ```
 cd your-repository-name
 ```
-
-
-***
-## Install Dependencies
 
 Install the required dependencies using npm or Yarn:
 
