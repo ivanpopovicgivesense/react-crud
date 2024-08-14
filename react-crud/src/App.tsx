@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Spinner } from "@fluentui/react-components";
+import { Button, Spinner } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserTable from "./UserTable";
@@ -7,6 +7,7 @@ import SearchFilter from "./SearchFilter";
 import FilterByUserType from "./FilterByUserType";
 import ErrorMessage from "./ErrorMessage";
 import CrudPanel from "./CrudPanel";
+import NavigationBar from "./NavigationBar";
 
 export type Data = {
   id: string;
@@ -89,36 +90,66 @@ const MyComponent: React.FC = () => {
       )}
       {!isLoading && !error && (
         <>
-          <FilterByUserType
-            data={data}
-            selectedUserType={selectedUserType}
-            onChange={handleUserTypeChange}
-          ></FilterByUserType>
-          <SearchFilter
-            value={criteria}
-            onChange={handleSetCriteria}
-          ></SearchFilter>
-          {noResults && (
-            <div style={{ textAlign: "center", margin: "20px 0" }}>
-              <h2>User not found!</h2>
-            </div>
-          )}
+          <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
+            <NavigationBar />
+            <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+              <div
+                style={{
+                  padding: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <SearchFilter value={criteria} onChange={handleSetCriteria} />
+                  <FilterByUserType
+                    data={data}
+                    selectedUserType={selectedUserType}
+                    onChange={handleUserTypeChange}
+                  />
 
-          <CrudPanel
-            data={data.find((item) => item.id === selectedItem) || ({} as Data)}
-            onEditUser={handleEditUser}
-            setSelectedItem={setSelectedItem}
-            selectedItem={selectedItem}
-            pregledIsOpen={pregledIsOpen}
-            fetchUsers={() => fetchUsers()}
-            usersArr={data}
-            setData={setData}
-          />
-          <UserTable
-            data={filteredData}
-            selectedItem={selectedItem}
-            onChangeSelectedItem={(item) => handleSetSelectedItem(item)}
-          />
+                  <Button
+                    appearance="primary"
+                    onClick={() => navigate("create")}
+                  >
+                    Add User
+                  </Button>
+                  <CrudPanel
+                    data={
+                      data.find((item) => item.id === selectedItem) ||
+                      ({} as Data)
+                    }
+                    onEditUser={handleEditUser}
+                    setSelectedItem={setSelectedItem}
+                    selectedItem={selectedItem}
+                    pregledIsOpen={pregledIsOpen}
+                    fetchUsers={fetchUsers}
+                    usersArr={data}
+                    setData={setData}
+                  />
+                </div>
+                <UserTable
+                  data={filteredData}
+                  selectedItem={selectedItem}
+                  onChangeSelectedItem={handleSetSelectedItem}
+                />
+              </div>
+              <div style={{ flex: 1, padding: "10px" }}></div>
+              {noResults && (
+                <div style={{ textAlign: "center", margin: "20px 0" }}>
+                  <h2>User not found!</h2>
+                </div>
+              )}
+            </div>
+          </div>
         </>
       )}
       {error && <ErrorMessage message={error} />}

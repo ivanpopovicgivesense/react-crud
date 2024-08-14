@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "@fluentui/react-components";
-import { useNavigate } from "react-router-dom";
 import DeleteUser from "./DeleteUser";
 import ViewUserDialog from "./ViewUserDialog";
 import { Data } from "./App";
@@ -26,25 +25,24 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
   setData,
   usersArr,
 }) => {
-  const navigate = useNavigate();
   if (!data) {
     return null;
   }
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          gap: "8px",
-        }}
-      >
+      <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
         {selectedItem !== null && pregledIsOpen && (
-          <Button appearance="secondary" onClick={() => setSelectedItem(null)}>
-            Cancel
+          <ViewUserDialog data={data}></ViewUserDialog>
+        )}
+        {selectedItem !== null && pregledIsOpen && (
+          <Button
+            style={{ backgroundColor: "#FFAC1C" }}
+            appearance="primary"
+            onClick={() => onEditUser(data)}
+          >
+            Update
           </Button>
         )}
-
         {selectedItem !== null && pregledIsOpen && (
           <DeleteUser
             users={data}
@@ -56,21 +54,10 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
         )}
 
         {selectedItem !== null && pregledIsOpen && (
-          <Button
-            style={{ backgroundColor: "#FFAC1C" }}
-            appearance="primary"
-            onClick={() => onEditUser(data)}
-          >
-            Update
+          <Button appearance="secondary" onClick={() => setSelectedItem(null)}>
+            Cancel
           </Button>
         )}
-
-        {selectedItem !== null && pregledIsOpen && (
-          <ViewUserDialog data={data}></ViewUserDialog>
-        )}
-        <Button appearance="primary" onClick={() => navigate("create")}>
-          Add User
-        </Button>
       </div>
     </>
   );

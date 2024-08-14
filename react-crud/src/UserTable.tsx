@@ -19,8 +19,7 @@ type UserTableProps = {
 const UserTable: React.FC<UserTableProps> = React.memo(
   ({ data, selectedItem, onChangeSelectedItem }) => {
     return (
-      <>
-        <div style={{ display: "flex", justifyContent: "flex-end" }}></div>
+      <div style={{ flex: 1, padding: "10px" }}>
         <Table>
           <TableHeader style={{ fontSize: "20px" }}>
             <TableRow>
@@ -83,7 +82,7 @@ const UserTable: React.FC<UserTableProps> = React.memo(
             )}
           </TableBody>
         </Table>
-      </>
+      </div>
     );
   }
 );
