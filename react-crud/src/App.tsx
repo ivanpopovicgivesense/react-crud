@@ -141,13 +141,12 @@ const MyComponent: React.FC = () => {
                   selectedItem={selectedItem}
                   onChangeSelectedItem={handleSetSelectedItem}
                 />
+                {noResults && (
+                  <div style={{ textAlign: "center", margin: "20px 0" }}>
+                    <h2>User not found...</h2>
+                  </div>
+                )}
               </div>
-              <div style={{ flex: 1, padding: "10px" }}></div>
-              {noResults && (
-                <div style={{ textAlign: "center", margin: "20px 0" }}>
-                  <h2>User not found!</h2>
-                </div>
-              )}
             </div>
           </div>
         </>
