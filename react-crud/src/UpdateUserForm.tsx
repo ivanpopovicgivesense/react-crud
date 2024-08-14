@@ -2,20 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Button, Input, Label, Spinner } from "@fluentui/react-components";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-
-type UserData = {
-  id: string;
-  Name: string;
-  Surname: string;
-  UserType: string;
-  CreatedDate: string;
-  City: string;
-  Address: string;
-};
+import { Data } from "./App";
 
 export const UpdateUserForm: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
-  const [formData, setFormData] = useState<UserData | null>(null);
+  const [formData, setFormData] = useState<Data | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();

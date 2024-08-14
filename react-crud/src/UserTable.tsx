@@ -8,24 +8,15 @@ import {
   TableHeaderCell,
   TableCellLayout,
 } from "@fluentui/react-components";
+import { Data } from "./App";
 
-type Data = {
-  id: string;
-  Name: string;
-  Surname: string;
-  UserType: string;
-  CreatedDate: string;
-  City: string;
-  Address: string;
-};
-
-type PersonTableProps = {
+type UserTableProps = {
   data: Data[];
   selectedItem: null | string;
   onChangeSelectedItem: (row: string) => void;
 };
 
-const PersonTable: React.FC<PersonTableProps> = React.memo(
+const UserTable: React.FC<UserTableProps> = React.memo(
   ({ data, selectedItem, onChangeSelectedItem }) => {
     return (
       <>
@@ -97,4 +88,4 @@ const PersonTable: React.FC<PersonTableProps> = React.memo(
   }
 );
 
-export default PersonTable;
+export default UserTable;

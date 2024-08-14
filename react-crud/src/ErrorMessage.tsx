@@ -1,10 +1,7 @@
+import { Error } from "./App";
+
 type ErrorMessageProps = {
   message: string | Error;
-};
-
-type Error = {
-  message: string;
-  status?: number;
 };
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {

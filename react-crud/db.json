@@ -11,16 +11,6 @@
       "id": "4444"
     },
     {
-      "Id": 2,
-      "Name": "Mark",
-      "Surname": "Smith",
-      "UserType": "User",
-      "CreatedDate": "2021-07-08",
-      "City": "Miami",
-      "Address": "Address 456",
-      "id": "b194"
-    },
-    {
       "Id": 3,
       "Name": "Michael",
       "Surname": "Blue",
@@ -29,16 +19,6 @@
       "City": "Cleveland",
       "Address": "Address 567",
       "id": "7325"
-    },
-    {
-      "Id": 5,
-      "Name": "Rebbecca",
-      "Surname": "James",
-      "UserType": "User",
-      "CreatedDate": "2018-11-14",
-      "City": "Montreal",
-      "Address": "Address 3456",
-      "id": "3101"
     }
   ]
 }

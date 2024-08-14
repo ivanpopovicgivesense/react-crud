@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Spinner } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import PersonTable from "./PersonTable";
-import ViewUser from "./ViewUser";
+import UserTable from "./UserTable";
 import SearchFilter from "./SearchFilter";
 import FilterByUserType from "./FilterByUserType";
 import ErrorMessage from "./ErrorMessage";
+import CrudPanel from "./CrudPanel";
 
-type Data = {
+export type Data = {
   id: string;
   Name: string;
   Surname: string;
@@ -18,7 +18,7 @@ type Data = {
   Address: string;
 };
 
-type Error = {
+export type Error = {
   message: string;
   status?: number;
 };
@@ -82,17 +82,6 @@ const MyComponent: React.FC = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const deleteUser = (id: string | null) => {
-    axios
-      .delete(`http://localhost:3000/person/${id}`)
-      .then(() => {
-        setData(data.filter((user) => user.id !== id));
-        console.log(`User with an id of ${id} was successfully deleted!`);
-      })
-      .catch((error) => console.error(`Error deleting user: ${error}`))
-      .finally(() => fetchUsers());
-  };
-
   return (
     <>
       {isLoading && (
@@ -115,15 +104,17 @@ const MyComponent: React.FC = () => {
             </div>
           )}
 
-          <ViewUser
+          <CrudPanel
             data={data.find((item) => item.id === selectedItem) || ({} as Data)}
-            onDeleteUser={() => deleteUser(selectedItem)}
             onEditUser={handleEditUser}
             setSelectedItem={setSelectedItem}
             selectedItem={selectedItem}
             pregledIsOpen={pregledIsOpen}
+            fetchUsers={() => fetchUsers()}
+            usersArr={data}
+            setData={setData}
           />
-          <PersonTable
+          <UserTable
             data={filteredData}
             selectedItem={selectedItem}
             onChangeSelectedItem={(item) => handleSetSelectedItem(item)}
