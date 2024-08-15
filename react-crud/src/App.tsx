@@ -79,6 +79,7 @@ const MyComponent: React.FC = () => {
     axios
       .get("http://localhost:3000/person")
       .then((response) => setData(response.data))
+      .then((res) => console.log(res))
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
   };
@@ -90,7 +91,7 @@ const MyComponent: React.FC = () => {
       )}
       {!isLoading && !error && (
         <>
-          <div style={{ display: "flex", height: "100vh", overflow: "hidden" }}>
+          <div style={{ display: "flex", height: "100%", overflow: "hidden" }}>
             <NavigationBar />
             <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
               <div
@@ -105,36 +106,55 @@ const MyComponent: React.FC = () => {
                   style={{
                     display: "flex",
                     alignItems: "center",
+                    justifyContent: "space-between",
                     gap: "10px",
                     marginBottom: "10px",
                   }}
                 >
-                  <SearchFilter value={criteria} onChange={handleSetCriteria} />
-                  <FilterByUserType
-                    data={data}
-                    selectedUserType={selectedUserType}
-                    onChange={handleUserTypeChange}
-                  />
-
-                  <Button
-                    appearance="primary"
-                    onClick={() => navigate("create")}
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                    }}
                   >
-                    Add User
-                  </Button>
-                  <CrudPanel
-                    data={
-                      data.find((item) => item.id === selectedItem) ||
-                      ({} as Data)
-                    }
-                    onEditUser={handleEditUser}
-                    setSelectedItem={setSelectedItem}
-                    selectedItem={selectedItem}
-                    pregledIsOpen={pregledIsOpen}
-                    fetchUsers={fetchUsers}
-                    usersArr={data}
-                    setData={setData}
-                  />
+                    <SearchFilter
+                      value={criteria}
+                      onChange={handleSetCriteria}
+                    />
+                    <FilterByUserType
+                      data={data}
+                      selectedUserType={selectedUserType}
+                      onChange={handleUserTypeChange}
+                    />
+                  </div>
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      gap: "10px",
+                    }}
+                  >
+                    <CrudPanel
+                      data={
+                        data.find((item) => item.id === selectedItem) ||
+                        ({} as Data)
+                      }
+                      onEditUser={handleEditUser}
+                      setSelectedItem={setSelectedItem}
+                      selectedItem={selectedItem}
+                      pregledIsOpen={pregledIsOpen}
+                      fetchUsers={fetchUsers}
+                      usersArr={data}
+                      setData={setData}
+                    />
+                    <Button
+                      appearance="primary"
+                      onClick={() => navigate("create")}
+                    >
+                      Add User
+                    </Button>
+                  </div>
                 </div>
                 <UserTable
                   data={filteredData}

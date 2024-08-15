@@ -10,7 +10,7 @@ import {
 const useStyles = makeStyles({
   sidebar: {
     width: "200px",
-    height: "95vh",
+    height: "100%",
     backgroundColor: "#f4f4f4",
     padding: "10px",
     boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",

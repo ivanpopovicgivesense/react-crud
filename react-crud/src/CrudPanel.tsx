@@ -32,15 +32,8 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
     <>
       <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
         {selectedItem !== null && pregledIsOpen && (
-          <ViewUserDialog data={data}></ViewUserDialog>
-        )}
-        {selectedItem !== null && pregledIsOpen && (
-          <Button
-            style={{ backgroundColor: "#FFAC1C" }}
-            appearance="primary"
-            onClick={() => onEditUser(data)}
-          >
-            Update
+          <Button appearance="secondary" onClick={() => setSelectedItem(null)}>
+            Cancel
           </Button>
         )}
         {selectedItem !== null && pregledIsOpen && (
@@ -52,11 +45,17 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
             setSelectedItem={setSelectedItem}
           ></DeleteUser>
         )}
-
         {selectedItem !== null && pregledIsOpen && (
-          <Button appearance="secondary" onClick={() => setSelectedItem(null)}>
-            Cancel
+          <Button
+            style={{ backgroundColor: "#FFAC1C" }}
+            appearance="primary"
+            onClick={() => onEditUser(data)}
+          >
+            Update
           </Button>
+        )}
+        {selectedItem !== null && pregledIsOpen && (
+          <ViewUserDialog data={data}></ViewUserDialog>
         )}
       </div>
     </>
