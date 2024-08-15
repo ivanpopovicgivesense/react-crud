@@ -67,7 +67,6 @@ const NavigationBar = () => {
 
   const handleItemClick = (key: string) => {
     setActiveItem(key);
-    console.log(`Navigating to ${key}`);
   };
 
   return (
@@ -85,10 +84,7 @@ const NavigationBar = () => {
         </div>
       ))}
       <div className={classes.separator} />
-      <div
-        className={classes.logout}
-        onClick={() => console.log("Logging out")}
-      >
+      <div className={classes.logout}>
         <SignOutRegular />
         <Text>Log Out</Text>
       </div>
