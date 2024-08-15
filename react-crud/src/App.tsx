@@ -30,9 +30,9 @@ const MyComponent: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [noResults, setNoResults] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<null | string>(null);
-  const [error, setError] = useState<Error | null>(null);
   const [criteria, setCriteria] = useState<string>("");
   const [selectedUserType, setSelectedUserType] = useState<string>("");
+  const [error, setError] = useState<Error | null>(null);
 
   const navigate = useNavigate();
 

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fluentui/react-components": "^9.54.10",
+    "@fluentui/react-datepicker-compat": "^0.4.48",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

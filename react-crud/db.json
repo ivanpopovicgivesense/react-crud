@@ -98,6 +98,51 @@
       "City": "Denver",
       "Address": "Address 445",
       "id": "9876"
+    },
+    {
+      "Name": "Ava",
+      "Surname": "Clark",
+      "UserType": "Premium",
+      "CreatedDate": "2023-09-12",
+      "City": "San Diego",
+      "Address": "Address 567",
+      "id": "5432"
+    },
+    {
+      "Name": "Ethan",
+      "Surname": "Lewis",
+      "UserType": "Standard",
+      "CreatedDate": "2024-03-05",
+      "City": "Atlanta",
+      "Address": "Address 678",
+      "id": "6789"
+    },
+    {
+      "Name": "Mia",
+      "Surname": "Walker",
+      "UserType": "Administrator",
+      "CreatedDate": "2021-12-01",
+      "City": "Boston",
+      "Address": "Address 789",
+      "id": "3457"
+    },
+    {
+      "Name": "Noah",
+      "Surname": "Young",
+      "UserType": "Premium",
+      "CreatedDate": "2022-11-17",
+      "City": "Dallas",
+      "Address": "Address 890",
+      "id": "8764"
+    },
+    {
+      "Name": "Isabella",
+      "Surname": "Harris",
+      "UserType": "Standard",
+      "CreatedDate": "2023-02-20",
+      "City": "Miami",
+      "Address": "Address 901",
+      "id": "1236"
     }
   ]
 }
