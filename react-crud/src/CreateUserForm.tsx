@@ -14,13 +14,15 @@ export const CreateUserForm: React.FC = () => {
     Address: "",
   });
 
+  const API_URL = "http://localhost:3000/person/";
+
   const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     axios
-      .post("http://localhost:3000/person/", formData)
+      .post(API_URL, formData)
       .then((response) =>
         console.log(`User created ${JSON.stringify(response.data)}`)
       )

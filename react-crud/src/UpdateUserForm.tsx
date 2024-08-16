@@ -11,11 +11,13 @@ export const UpdateUserForm: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
+  const API_URL = "http://localhost:3000/person";
+
   useEffect(() => {
     if (userId) {
       setIsLoading(true);
       axios
-        .get(`http://localhost:3000/person/${userId}`)
+        .get(`${API_URL}/${userId}`)
         .then((response) => setFormData(response.data))
         .catch((err) => setError(err.message))
         .finally(() => setIsLoading(false));
@@ -28,7 +30,7 @@ export const UpdateUserForm: React.FC = () => {
 
     setIsLoading(true);
     axios
-      .put(`http://localhost:3000/person/${userId}`, formData)
+      .put(`${API_URL}/${userId}`, formData)
       .then(() => navigate("/"))
       .catch((err) => setError(err.message))
       .finally(() => setIsLoading(false));
