@@ -63,7 +63,6 @@ const MyComponent: React.FC = () => {
   };
 
   const handleEditUser = (user: Data) => {
-    console.log(`Navigating to /update/${user.id}`);
     navigate(`/update/${user.id}`);
     setPregledIsOpen(false);
   };

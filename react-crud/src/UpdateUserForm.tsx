@@ -6,7 +6,8 @@ import { Data } from "./App";
 
 export const UpdateUserForm: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
-  const [formData, setFormData] = useState<Data | null>(null);
+  const [initFormData, setInitFormData] = useState<Data | null>();
+  const [formData, setFormData] = useState<Data | null>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -18,11 +19,25 @@ export const UpdateUserForm: React.FC = () => {
       setIsLoading(true);
       axios
         .get(`${API_URL}/${userId}`)
-        .then((response) => setFormData(response.data))
+        .then((response) => {
+          setInitFormData(response.data);
+          setFormData(response.data);
+        })
         .catch((err) => setError(err.message))
         .finally(() => setIsLoading(false));
     }
   }, [userId]);
+
+  const isFormValid = () => {
+    return (
+      initFormData?.Name !== formData?.Name ||
+      initFormData?.Surname !== formData?.Surname ||
+      initFormData?.Address !== formData?.Address ||
+      initFormData?.CreatedDate !== formData?.CreatedDate ||
+      initFormData?.UserType !== formData?.UserType ||
+      initFormData?.City !== formData?.City
+    );
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -116,7 +131,11 @@ export const UpdateUserForm: React.FC = () => {
           <br />
           <br />
           <div>
-            <Button type="submit" appearance="primary">
+            <Button
+              type="submit"
+              appearance="primary"
+              disabled={!isFormValid()}
+            >
               Update
             </Button>
             <Button onClick={() => navigate("/")} appearance="secondary">

@@ -28,7 +28,7 @@
       "id": "9843"
     },
     {
-      "Name": "Emily",
+      "Name": "aaaa",
       "Surname": "Johnson",
       "UserType": "Premium",
       "CreatedDate": "2021-11-30",
@@ -143,24 +143,6 @@
       "City": "Miami",
       "Address": "Address 901",
       "id": "1236"
-    },
-    {
-      "id": "5de6",
-      "Name": "a",
-      "Surname": "a",
-      "UserType": "Administrator",
-      "CreatedDate": "2001-11-11",
-      "City": "aaaaaaa",
-      "Address": "aaaaa"
-    },
-    {
-      "id": "fb3d",
-      "Name": "nnnnnnnnnnna",
-      "Surname": "nnnnnnnnnnna",
-      "UserType": "Administrator",
-      "CreatedDate": "1111-11-11",
-      "City": "nnnnnnnnnnna",
-      "Address": "nnnnnnnnnnna"
     }
   ]
 }
