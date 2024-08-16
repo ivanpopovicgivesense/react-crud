@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Spinner } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import UserTable from "./UserTable";
 import SearchFilter from "./SearchFilter";
 import FilterByUserType from "./FilterByUserType";
 import ErrorMessage from "./ErrorMessage";
 import CrudPanel from "./CrudPanel";
 import NavigationBar from "./NavigationBar";
+import { useGetUsers } from "./api/useGetUsers";
 
 export type Data = {
   id: string;
@@ -25,14 +25,12 @@ export type Error = {
 };
 
 const MyComponent: React.FC = () => {
-  const [data, setData] = useState<Data[]>([]);
+  const { data, isLoading, error, setData, fetchUsers } = useGetUsers();
   const [pregledIsOpen, setPregledIsOpen] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [noResults, setNoResults] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<null | string>(null);
   const [criteria, setCriteria] = useState<string>("");
   const [selectedUserType, setSelectedUserType] = useState<string>("");
-  const [error, setError] = useState<Error | null>(null);
 
   const navigate = useNavigate();
 
@@ -44,10 +42,6 @@ const MyComponent: React.FC = () => {
       selectedUserType === "" || item.UserType === selectedUserType;
     return matchesName && matchesUserType;
   });
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
 
   useEffect(() => {
     const noResultsCondition =
@@ -72,16 +66,6 @@ const MyComponent: React.FC = () => {
     console.log(`Navigating to /update/${user.id}`);
     navigate(`/update/${user.id}`);
     setPregledIsOpen(false);
-  };
-
-  const fetchUsers = () => {
-    setIsLoading(true);
-    axios
-      .get("http://localhost:3000/person")
-      .then((response) => setData(response.data))
-      .then((res) => console.log(res))
-      .catch((error) => setError(error))
-      .finally(() => setIsLoading(false));
   };
 
   return (
