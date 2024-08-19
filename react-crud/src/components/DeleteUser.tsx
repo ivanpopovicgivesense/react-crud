@@ -10,7 +10,7 @@ import {
   DialogBody,
 } from "@fluentui/react-components";
 import axios from "axios";
-import { Data } from "./App";
+import { Data } from "../App";
 
 type DeleteUserProps = {
   users: Data;

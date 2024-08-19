@@ -1,6 +1,6 @@
 import React from "react";
 import { Select } from "@fluentui/react-components";
-import { Data } from "./App";
+import { Data } from "../App";
 
 type FilterByUserTypeProps = {
   data: Data[];

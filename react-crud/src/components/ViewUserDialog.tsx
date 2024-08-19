@@ -8,7 +8,7 @@ import {
   DialogSurface,
   DialogBody,
 } from "@fluentui/react-components";
-import { Data } from "./App";
+import { Data } from "../App";
 
 type ViewUserDialogueProps = {
   data: Data;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { CreateUserForm } from "../CreateUserForm";
-import { UpdateUserForm } from "../UpdateUserForm";
+import { CreateUserForm } from "../pages/CreateUserForm";
+import { UpdateUserForm } from "../pages/UpdateUserForm";
 import LayoutComponent from "./components/LayoutComponent";
 import MyComponent from "../App";
 

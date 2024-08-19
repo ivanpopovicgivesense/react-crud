@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Input, Label, Spinner } from "@fluentui/react-components";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { Data } from "./App";
+import { Data } from "../App";
 
 export const UpdateUserForm: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
@@ -28,7 +28,7 @@ export const UpdateUserForm: React.FC = () => {
     }
   }, [userId]);
 
-  const isFormValid = () => {
+  const isFormValid = (): boolean => {
     return (
       initFormData?.Name !== formData?.Name ||
       initFormData?.Surname !== formData?.Surname ||
@@ -39,8 +39,7 @@ export const UpdateUserForm: React.FC = () => {
     );
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     if (!formData || !userId) return;
 
     setIsLoading(true);
@@ -144,7 +143,7 @@ export const UpdateUserForm: React.FC = () => {
           </div>
         </form>
       )}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <h2 style={{ color: "red" }}>{error}</h2>}
     </>
   );
 };

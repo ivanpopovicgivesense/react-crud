@@ -1,4 +1,4 @@
-import { Error } from "./App";
+import { Error } from "../App";
 
 type ErrorMessageProps = {
   message: string | Error;

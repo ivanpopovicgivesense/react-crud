@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "@fluentui/react-components";
-import DeleteUser from "./DeleteUser";
-import ViewUserDialog from "./ViewUserDialog";
-import { Data } from "./App";
+import DeleteUser from "../components/DeleteUser";
+import ViewUserDialog from "../components/ViewUserDialog";
+import { Data } from "../App";
 
 type CrudPanelProps = {
   data: Data;

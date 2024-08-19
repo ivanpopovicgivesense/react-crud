@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Button, Spinner } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
-import UserTable from "./UserTable";
-import SearchFilter from "./SearchFilter";
-import FilterByUserType from "./FilterByUserType";
-import ErrorMessage from "./ErrorMessage";
-import CrudPanel from "./CrudPanel";
-import NavigationBar from "./NavigationBar";
-import { useGetUsers } from "./api/useGetUsers";
+import UserTable from "./components/UserTable";
+import SearchFilter from "./components/SearchFilter";
+import FilterByUserType from "./components/FilterByUserType";
+import ErrorMessage from "./components/ErrorMessage";
+import CrudPanel from "./containers/CrudPanel";
+import NavigationBar from "./components/NavigationBar";
+import { useGetUsers } from "./services/useGetUsers";
 
 export type Data = {
   id: string;

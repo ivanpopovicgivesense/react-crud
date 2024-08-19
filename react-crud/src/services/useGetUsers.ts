@@ -15,7 +15,6 @@ export const useGetUsers = () => {
     axios
       .get(API_URL)
       .then((response) => setData(response.data))
-      .then((res) => console.log(res))
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
   };

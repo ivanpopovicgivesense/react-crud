@@ -8,7 +8,7 @@ import {
   TableHeaderCell,
   TableCellLayout,
 } from "@fluentui/react-components";
-import { Data } from "./App";
+import { Data } from "../App";
 
 type UserTableProps = {
   data: Data[];
