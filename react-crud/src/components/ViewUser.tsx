@@ -9,6 +9,7 @@ import {
   DialogBody,
 } from "@fluentui/react-components";
 import { Data } from "../App";
+import { ReadingModeMobileFilled } from "@fluentui/react-icons";
 
 type ViewUserDialogueProps = {
   data: Data;
@@ -18,9 +19,11 @@ const ViewUserDialog: React.FC<ViewUserDialogueProps> = ({ data }) => {
   return (
     <Dialog modalType="alert">
       <DialogTrigger>
-        <Button style={{ backgroundColor: "#228B22" }} appearance="primary">
+        <ReadingModeMobileFilled
+          style={{ color: "#228B22", fontSize: "32px", cursor: "pointer" }}
+        >
           View
-        </Button>
+        </ReadingModeMobileFilled>
       </DialogTrigger>
       <DialogSurface>
         <DialogBody>

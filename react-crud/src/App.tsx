@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Spinner } from "@fluentui/react-components";
+import { Spinner } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
 import UserTable from "./components/UserTable";
 import SearchFilter from "./components/SearchFilter";
@@ -8,6 +8,7 @@ import ErrorMessage from "./components/ErrorMessage";
 import CrudPanel from "./containers/CrudPanel";
 import NavigationBar from "./components/NavigationBar";
 import { useGetUsers } from "./hooks/useGetUsers";
+import { AddFilled } from "@fluentui/react-icons";
 
 export type Data = {
   id: string;
@@ -131,12 +132,16 @@ const MyComponent: React.FC = () => {
                       usersArr={data}
                       setData={setData}
                     />
-                    <Button
-                      appearance="primary"
+                    <AddFilled
+                      style={{
+                        cursor: "pointer",
+                        fontSize: "32px",
+                        color: "#2e95d4",
+                      }}
                       onClick={() => navigate("create")}
                     >
                       Add User
-                    </Button>
+                    </AddFilled>
                   </div>
                 </div>
                 <UserTable

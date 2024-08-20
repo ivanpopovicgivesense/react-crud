@@ -11,6 +11,7 @@ import {
 } from "@fluentui/react-components";
 import axios from "axios";
 import { Data } from "../App";
+import { DeleteFilled } from "@fluentui/react-icons";
 
 type DeleteUserProps = {
   users: Data;
@@ -44,9 +45,11 @@ const DeleteUser: React.FC<DeleteUserProps> = ({
     <>
       <Dialog>
         <DialogTrigger disableButtonEnhancement>
-          <Button style={{ backgroundColor: "#E50000", color: "#FFF" }}>
+          <DeleteFilled
+            style={{ color: "#E50000", cursor: "pointer", fontSize: "32px" }}
+          >
             Delete
-          </Button>
+          </DeleteFilled>
         </DialogTrigger>
         <DialogSurface>
           <DialogBody>

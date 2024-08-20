@@ -1,9 +1,8 @@
 import React from "react";
-import { Button } from "@fluentui/react-components";
 import DeleteUser from "../components/DeleteUser";
 import ViewUser from "../components/ViewUser";
 import { Data } from "../App";
-
+import { DualScreenUpdateFilled } from "@fluentui/react-icons";
 type CrudPanelProps = {
   data: Data;
   usersArr: Data[];
@@ -32,11 +31,6 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
     <>
       <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
         {selectedItem !== null && pregledIsOpen && (
-          <Button appearance="secondary" onClick={() => setSelectedItem(null)}>
-            Cancel
-          </Button>
-        )}
-        {selectedItem !== null && pregledIsOpen && (
           <DeleteUser
             users={data}
             fetchUsers={fetchUsers}
@@ -46,13 +40,12 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
           ></DeleteUser>
         )}
         {selectedItem !== null && pregledIsOpen && (
-          <Button
-            style={{ backgroundColor: "#FFAC1C" }}
-            appearance="primary"
+          <DualScreenUpdateFilled
+            style={{ color: "#FFAC1C", fontSize: "32px", cursor: "pointer" }}
             onClick={() => onEditUser(data)}
           >
             Update
-          </Button>
+          </DualScreenUpdateFilled>
         )}
         {selectedItem !== null && pregledIsOpen && (
           <ViewUser data={data}></ViewUser>
