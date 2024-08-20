@@ -2,7 +2,7 @@ import React from "react";
 import DeleteUser from "../components/DeleteUser";
 import ViewUser from "../components/ViewUser";
 import { Data } from "../App";
-import { DualScreenUpdateFilled } from "@fluentui/react-icons";
+import { DualScreenUpdateFilled, ArrowExitFilled } from "@fluentui/react-icons";
 type CrudPanelProps = {
   data: Data;
   usersArr: Data[];
@@ -30,6 +30,13 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
   return (
     <>
       <div style={{ display: "flex", gap: "8px", justifyContent: "flex-end" }}>
+        {selectedItem !== null && pregledIsOpen && (
+          <ArrowExitFilled
+            onClick={() => setSelectedItem(null)}
+            style={{ cursor: "pointer", fontSize: "32px" }}
+          ></ArrowExitFilled>
+        )}
+
         {selectedItem !== null && pregledIsOpen && (
           <DeleteUser
             users={data}
