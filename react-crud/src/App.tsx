@@ -7,7 +7,7 @@ import FilterByUserType from "./components/FilterByUserType";
 import ErrorMessage from "./components/ErrorMessage";
 import CrudPanel from "./containers/CrudPanel";
 import NavigationBar from "./components/NavigationBar";
-import { useGetUsers } from "./services/useGetUsers";
+import { useGetUsers } from "./hooks/useGetUsers";
 
 export type Data = {
   id: string;

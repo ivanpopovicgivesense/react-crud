@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "@fluentui/react-components";
 import DeleteUser from "../components/DeleteUser";
-import ViewUserDialog from "../components/ViewUserDialog";
+import ViewUser from "../components/ViewUser";
 import { Data } from "../App";
 
 type CrudPanelProps = {
@@ -10,7 +10,7 @@ type CrudPanelProps = {
   selectedItem: string | null;
   pregledIsOpen: boolean;
   fetchUsers: () => void;
-  setData: (arr: Data[]) => void;
+  setData: (usersArr: Data[]) => void;
   onEditUser: (user: Data) => void;
   setSelectedItem: (selectedItem: string | null) => void;
 };
@@ -55,7 +55,7 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
           </Button>
         )}
         {selectedItem !== null && pregledIsOpen && (
-          <ViewUserDialog data={data}></ViewUserDialog>
+          <ViewUser data={data}></ViewUser>
         )}
       </div>
     </>
