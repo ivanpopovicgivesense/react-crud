@@ -1,32 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button, Input, Label, Spinner } from "@fluentui/react-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Data } from "../App";
+import { useGetUsers } from "../hooks/useGetUsers";
+import { useGetUser } from "../hooks/useGetUser";
 
 export const UpdateUserForm: React.FC = () => {
-  const { userId } = useParams<{ userId: string }>();
-  const [initFormData, setInitFormData] = useState<Data | null>();
-  const [formData, setFormData] = useState<Data | null>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const { isLoading, error, setIsLoading, setError } = useGetUsers();
+  const { userId, setFormData, formData, initFormData } = useGetUser();
   const navigate = useNavigate();
 
   const API_URL = "http://localhost:3000/person";
-
-  useEffect(() => {
-    if (userId) {
-      setIsLoading(true);
-      axios
-        .get(`${API_URL}/${userId}`)
-        .then((response) => {
-          setInitFormData(response.data);
-          setFormData(response.data);
-        })
-        .catch((err) => setError(err.message))
-        .finally(() => setIsLoading(false));
-    }
-  }, [userId]);
 
   const isFormValid = (): boolean => {
     return (
@@ -143,7 +127,7 @@ export const UpdateUserForm: React.FC = () => {
           </div>
         </form>
       )}
-      {error && <h2 style={{ color: "red" }}>{error}</h2>}
+      {error && <h2 style={{ color: "red" }}>{error.message}</h2>}
     </>
   );
 };
