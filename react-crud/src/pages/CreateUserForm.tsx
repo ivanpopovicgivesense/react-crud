@@ -33,7 +33,13 @@ export const CreateUserForm: React.FC = () => {
 
   return (
     <>
-      {isLoading && <Spinner label="Creating user..." size="large" />}
+      {isLoading && (
+        <Spinner
+          style={{ marginTop: "300px" }}
+          label="Creating user..."
+          size="large"
+        />
+      )}
       {!isLoading && (
         <form
           onSubmit={handleSubmit}

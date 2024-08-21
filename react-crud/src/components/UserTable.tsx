@@ -75,7 +75,10 @@ const UserTable: React.FC<UserTableProps> = React.memo(
                   }}
                 >
                   <TableCell>
-                    <Checkbox checked={id === selectedItem}></Checkbox>
+                    <Checkbox
+                      checked={id === selectedItem}
+                      shape="circular"
+                    ></Checkbox>
                   </TableCell>
                   <TableCell>
                     <TableCellLayout>{id}</TableCellLayout>

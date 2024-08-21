@@ -26,7 +26,7 @@ export type Error = {
 };
 
 const MyComponent: React.FC = () => {
-  const { data, isLoading, error, setData, fetchUsers } = useGetUsers();
+  const { data, setData, isLoading, error, fetchUsers } = useGetUsers();
   const [pregledIsOpen, setPregledIsOpen] = useState<boolean>(false);
   const [noResults, setNoResults] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<null | string>(null);

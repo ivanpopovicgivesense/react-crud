@@ -45,7 +45,13 @@ export const UpdateUserForm: React.FC = () => {
 
   return (
     <>
-      {isLoading && <Spinner label="Loading user data..." size="large" />}
+      {isLoading && (
+        <Spinner
+          style={{ marginTop: "300px" }}
+          label="Loading user data..."
+          size="large"
+        />
+      )}
       {!isLoading && formData && (
         <form
           style={{
