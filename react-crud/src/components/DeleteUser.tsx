@@ -12,11 +12,12 @@ import {
 import axios from "axios";
 import { Data } from "../App";
 import { DeleteFilled } from "@fluentui/react-icons";
+import { useGetUsers } from "../api/useGetUsers";
+import { useNavigate } from "react-router-dom";
 
 type DeleteUserProps = {
   users: Data;
   usersArr: Data[];
-  fetchUsers: () => void;
   setData: (users: Data[]) => void;
   setSelectedItem: (selectedUser: string | null) => void;
 };
@@ -24,11 +25,11 @@ type DeleteUserProps = {
 const DeleteUser: React.FC<DeleteUserProps> = ({
   users,
   usersArr,
-  fetchUsers,
-  setData,
   setSelectedItem,
 }) => {
-  const API_URL = "http://localhost:3000/person";
+  const { API_URL, setData } = useGetUsers();
+
+  const navigate = useNavigate();
 
   const deleteUser = (id: string | null) => {
     axios
@@ -38,7 +39,7 @@ const DeleteUser: React.FC<DeleteUserProps> = ({
         console.log(`User with an id of ${id} was successfully deleted!`);
       })
       .catch((error) => console.error(`Error deleting user: ${error}`))
-      .finally(() => fetchUsers());
+      .finally(() => navigate(0));
   };
 
   return (

@@ -40,7 +40,6 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
         {selectedItem !== null && pregledIsOpen && (
           <DeleteUser
             users={data}
-            fetchUsers={fetchUsers}
             setData={setData}
             usersArr={usersArr}
             setSelectedItem={setSelectedItem}

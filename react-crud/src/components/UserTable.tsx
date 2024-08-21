@@ -23,25 +23,39 @@ const UserTable: React.FC<UserTableProps> = React.memo(
         <Table>
           <TableHeader style={{ fontSize: "20px" }}>
             <TableRow>
-              <TableHeaderCell style={{ textAlign: "center" }}>
+              <TableHeaderCell
+                style={{ fontSize: "16px", textAlign: "center" }}
+              >
                 <strong>ID</strong>
               </TableHeaderCell>
-              <TableHeaderCell style={{ textAlign: "center" }}>
+              <TableHeaderCell
+                style={{ fontSize: "16px", textAlign: "center" }}
+              >
                 <strong>Name</strong>
               </TableHeaderCell>
-              <TableHeaderCell style={{ textAlign: "center" }}>
+              <TableHeaderCell
+                style={{ fontSize: "16px", textAlign: "center" }}
+              >
                 <strong>Surname</strong>
               </TableHeaderCell>
-              <TableHeaderCell style={{ textAlign: "center" }}>
+              <TableHeaderCell
+                style={{ fontSize: "16px", textAlign: "center" }}
+              >
                 <strong>User Type</strong>
               </TableHeaderCell>
-              <TableHeaderCell style={{ textAlign: "center" }}>
+              <TableHeaderCell
+                style={{ fontSize: "16px", textAlign: "center" }}
+              >
                 <strong>Created Date</strong>
               </TableHeaderCell>
-              <TableHeaderCell style={{ textAlign: "center" }}>
+              <TableHeaderCell
+                style={{ fontSize: "16px", textAlign: "center" }}
+              >
                 <strong>City</strong>
               </TableHeaderCell>
-              <TableHeaderCell style={{ textAlign: "center" }}>
+              <TableHeaderCell
+                style={{ fontSize: "16px", textAlign: "center" }}
+              >
                 <strong>Address</strong>
               </TableHeaderCell>
             </TableRow>

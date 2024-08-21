@@ -31,5 +31,6 @@ export const useGetUsers = () => {
     setIsLoading,
     setError,
     error,
+    API_URL,
   };
 };

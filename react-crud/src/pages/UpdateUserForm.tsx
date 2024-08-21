@@ -2,15 +2,24 @@ import React from "react";
 import { Button, Input, Label, Spinner } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useGetUsers } from "../hooks/useGetUsers";
-import { useGetUser } from "../hooks/useGetUser";
+import { useGetUser } from "../api/useGetUser";
+import { useParams } from "react-router-dom";
+import { useGetUsers } from "../api/useGetUsers";
 
 export const UpdateUserForm: React.FC = () => {
-  const { isLoading, error, setIsLoading, setError } = useGetUsers();
-  const { userId, setFormData, formData, initFormData } = useGetUser();
-  const navigate = useNavigate();
+  const { userId } = useParams<{ userId: string }>();
+  const { API_URL } = useGetUsers();
+  const {
+    isLoading,
+    error,
+    setIsLoading,
+    setError,
+    setFormData,
+    formData,
+    initFormData,
+  } = useGetUser(userId);
 
-  const API_URL = "http://localhost:3000/person";
+  const navigate = useNavigate();
 
   const isFormValid = (): boolean => {
     return (
