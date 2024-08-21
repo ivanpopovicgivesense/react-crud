@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableHeaderCell,
   TableCellLayout,
+  Checkbox,
 } from "@fluentui/react-components";
 import { Data } from "../App";
 
@@ -23,6 +24,9 @@ const UserTable: React.FC<UserTableProps> = React.memo(
         <Table>
           <TableHeader style={{ fontSize: "20px" }}>
             <TableRow>
+              <TableHeaderCell
+                style={{ fontSize: "16px", textAlign: "center" }}
+              ></TableHeaderCell>
               <TableHeaderCell
                 style={{ fontSize: "16px", textAlign: "center" }}
               >
@@ -70,6 +74,9 @@ const UserTable: React.FC<UserTableProps> = React.memo(
                     backgroundColor: id === selectedItem ? "#DDD" : "#FFF",
                   }}
                 >
+                  <TableCell>
+                    <Checkbox checked={id === selectedItem}></Checkbox>
+                  </TableCell>
                   <TableCell>
                     <TableCellLayout>{id}</TableCellLayout>
                   </TableCell>
