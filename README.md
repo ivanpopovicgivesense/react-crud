@@ -14,12 +14,6 @@ Welcome to the React CRUD App project! This application is designed to demonstra
 
 ***
 
-## Technologies Used
-
-- **React:** A popular JavaScript library for building user interfaces.
-- **TypeScript:** A strongly typed programming language that builds on JavaScript, providing better tooling and improved code quality.
-- **Fluent UI:** A set of React components designed by Microsoft to build consistent and accessible web experiences.
-***
 
 ## Getting Started
 
