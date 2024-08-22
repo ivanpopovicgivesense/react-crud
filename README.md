@@ -6,7 +6,6 @@ Welcome to the React CRUD App project! This application is designed to demonstra
 
 
 ## Features
-***
 
 - **User Management:** Effortlessly add, update, delete, and view user information directly from an intuitive table interface.
 - **Selection Capabilities:** Select or deselect multiple users with ease for batch operations.
@@ -16,7 +15,6 @@ Welcome to the React CRUD App project! This application is designed to demonstra
 ***
 
 ## Technologies Used
-***
 
 - **React:** A popular JavaScript library for building user interfaces.
 - **TypeScript:** A strongly typed programming language that builds on JavaScript, providing better tooling and improved code quality.
@@ -24,7 +22,6 @@ Welcome to the React CRUD App project! This application is designed to demonstra
 ***
 
 ## Getting Started
-***
 
 Follow these instructions to get a copy of the project up and running on your local machine.
 
@@ -42,7 +39,6 @@ git clone https://github.com/ivanpopovicgivesense/react-crud.git
 
 ***
 ## Install Dependencies
-
 
 Navigate into the project directory:
 
