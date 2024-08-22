@@ -1,7 +1,33 @@
+# React CRUD Application
+
+Welcome to the React CRUD App project! This application is designed to demonstrate a full-featured **CRUD** (Create, Read, Update, Delete) interface built with **React**, **TypeScript**, and **Fluent UI**.
+
+***
+
+
+## Features
+***
+
+- **User Management:** Effortlessly add, update, delete, and view user information directly from an intuitive table interface.
+- **Selection Capabilities:** Select or deselect multiple users with ease for batch operations.
+- **Sidebar Navigation:** Navigate through different sections using a responsive sidebar, including pages for Calendar, Settings, and Logout.
+- **Modern UI:** Enjoy a sleek and modern user experience, powered by Fluent UI components.
+
+***
+
+## Technologies Used
+***
+
+- **React:** A popular JavaScript library for building user interfaces.
+- **TypeScript:** A strongly typed programming language that builds on JavaScript, providing better tooling and improved code quality.
+- **Fluent UI:** A set of React components designed by Microsoft to build consistent and accessible web experiences.
+***
+
 ## Getting Started
 ***
 
 Follow these instructions to get a copy of the project up and running on your local machine.
+
 
 
 ***
@@ -99,3 +125,4 @@ or
 ```
 yarn start
 ```
+***
