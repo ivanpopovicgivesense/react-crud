@@ -2,7 +2,7 @@ import React from "react";
 import DeleteUser from "../components/DeleteUser";
 import ViewUser from "../components/ViewUser";
 import { Data } from "../App";
-import { DualScreenUpdateFilled } from "@fluentui/react-icons";
+import { DualScreenUpdateFilled as UpdateIcon } from "@fluentui/react-icons";
 type CrudPanelProps = {
   data: Data;
   usersArr: Data[];
@@ -38,12 +38,12 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
           ></DeleteUser>
         )}
         {selectedItem !== null && pregledIsOpen && (
-          <DualScreenUpdateFilled
+          <UpdateIcon
             style={{ color: "#FFAC1C", fontSize: "32px", cursor: "pointer" }}
             onClick={() => onEditUser(data)}
           >
             Update
-          </DualScreenUpdateFilled>
+          </UpdateIcon>
         )}
         {selectedItem !== null && pregledIsOpen && (
           <ViewUser data={data}></ViewUser>

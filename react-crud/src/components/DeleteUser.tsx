@@ -11,7 +11,7 @@ import {
 } from "@fluentui/react-components";
 import axios from "axios";
 import { Data } from "../App";
-import { DeleteFilled } from "@fluentui/react-icons";
+import { DeleteFilled as DeleteIcon } from "@fluentui/react-icons";
 import { useGetUsers } from "../api/useGetUsers";
 import { useNavigate } from "react-router-dom";
 
@@ -46,11 +46,11 @@ const DeleteUser: React.FC<DeleteUserProps> = ({
     <>
       <Dialog>
         <DialogTrigger disableButtonEnhancement>
-          <DeleteFilled
+          <DeleteIcon
             style={{ color: "#E50000", cursor: "pointer", fontSize: "32px" }}
           >
             Delete
-          </DeleteFilled>
+          </DeleteIcon>
         </DialogTrigger>
         <DialogSurface>
           <DialogBody>

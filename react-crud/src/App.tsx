@@ -8,7 +8,7 @@ import ErrorMessage from "./components/ErrorMessage";
 import CrudPanel from "./containers/CrudPanel";
 import NavigationBar from "./components/NavigationBar";
 import { useGetUsers } from "./api/useGetUsers";
-import { AddFilled } from "@fluentui/react-icons";
+import { AddFilled as CreateIcon } from "@fluentui/react-icons";
 
 export type Data = {
   id: string;
@@ -132,7 +132,7 @@ const MyComponent: React.FC = () => {
                       usersArr={data}
                       setData={setData}
                     />
-                    <AddFilled
+                    <CreateIcon
                       style={{
                         cursor: "pointer",
                         fontSize: "32px",
@@ -141,7 +141,7 @@ const MyComponent: React.FC = () => {
                       onClick={() => navigate("create")}
                     >
                       Add User
-                    </AddFilled>
+                    </CreateIcon>
                   </div>
                 </div>
                 <UserTable

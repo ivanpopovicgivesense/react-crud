@@ -9,8 +9,8 @@ import {
 } from "@fluentui/react-components";
 import { Data } from "../App";
 import {
-  ReadingModeMobileFilled,
-  ArrowExitFilled,
+  ReadingModeMobileFilled as ViewIcon,
+  ArrowExitFilled as CloseIcon,
 } from "@fluentui/react-icons";
 
 type ViewUserDialogueProps = {
@@ -21,11 +21,11 @@ const ViewUserDialog: React.FC<ViewUserDialogueProps> = ({ data }) => {
   return (
     <Dialog modalType="alert">
       <DialogTrigger>
-        <ReadingModeMobileFilled
+        <ViewIcon
           style={{ color: "#228B22", fontSize: "32px", cursor: "pointer" }}
         >
           View
-        </ReadingModeMobileFilled>
+        </ViewIcon>
       </DialogTrigger>
       <DialogSurface>
         <DialogBody>
@@ -41,9 +41,9 @@ const ViewUserDialog: React.FC<ViewUserDialogueProps> = ({ data }) => {
           </DialogContent>
           <DialogActions>
             <DialogTrigger>
-              <ArrowExitFilled style={{ fontSize: "32px", cursor: "pointer" }}>
+              <CloseIcon style={{ fontSize: "32px", cursor: "pointer" }}>
                 Close
-              </ArrowExitFilled>
+              </CloseIcon>
             </DialogTrigger>
           </DialogActions>
         </DialogBody>
