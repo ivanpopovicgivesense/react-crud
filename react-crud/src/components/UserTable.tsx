@@ -19,6 +19,19 @@ type UserTableProps = {
 
 const UserTable: React.FC<UserTableProps> = React.memo(
   ({ data, selectedItem, onChangeSelectedItem }) => {
+    const dateFormatter = (date: Date) => {
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDay();
+
+      return `${day}.${month}.${year}`;
+    };
+    if (data.length === 0)
+      return (
+        <div style={{ textAlign: "center", margin: "20px 0" }}>
+          <h2>User not found...</h2>
+        </div>
+      );
     return (
       <div style={{ flex: 1, padding: "10px" }}>
         <Table>
@@ -93,7 +106,9 @@ const UserTable: React.FC<UserTableProps> = React.memo(
                     <TableCellLayout>{UserType}</TableCellLayout>
                   </TableCell>
                   <TableCell>
-                    <TableCellLayout>{CreatedDate}</TableCellLayout>
+                    <TableCellLayout>
+                      {dateFormatter(new Date(CreatedDate))}
+                    </TableCellLayout>
                   </TableCell>
                   <TableCell>
                     <TableCellLayout>{City}</TableCellLayout>

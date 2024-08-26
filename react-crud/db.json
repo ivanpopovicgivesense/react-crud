@@ -19,7 +19,7 @@
       "id": "7325"
     },
     {
-      "Name": "Laura",
+      "Name": "Laura1",
       "Surname": "Davis",
       "UserType": "Standard",
       "CreatedDate": "2024-01-10",
@@ -71,6 +71,15 @@
       "City": "Miami",
       "Address": "Address 901",
       "id": "1236"
+    },
+    {
+      "id": "5915",
+      "Name": "Marko",
+      "Surname": "Savic",
+      "UserType": "Administrator",
+      "CreatedDate": "2024-08-14",
+      "City": "Trstenik",
+      "Address": "K. Milice 70/4"
     }
   ]
 }

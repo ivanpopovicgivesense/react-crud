@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Spinner } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
 import UserTable from "./components/UserTable";
@@ -28,27 +28,26 @@ export type Error = {
 const MyComponent: React.FC = () => {
   const { data, setData, isLoading, error, fetchUsers } = useGetUsers();
   const [pregledIsOpen, setPregledIsOpen] = useState<boolean>(false);
-  const [noResults, setNoResults] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<null | string>(null);
   const [criteria, setCriteria] = useState<string>("");
   const [selectedUserType, setSelectedUserType] = useState<string>("");
 
   const navigate = useNavigate();
 
-  const filteredData = data.filter((item) => {
-    const matchesName =
-      criteria === "" ||
-      item.Name.toLowerCase().startsWith(criteria.toLowerCase());
-    const matchesUserType =
-      selectedUserType === "" || item.UserType === selectedUserType;
-    return matchesName && matchesUserType;
-  });
-
-  useEffect(() => {
-    const noResultsCondition =
-      filteredData.length === 0 && (criteria !== "" || selectedUserType !== "");
-    setNoResults(noResultsCondition);
-  }, [filteredData, selectedUserType, criteria]);
+  const handleFilteredData = (
+    data: Data[],
+    criteria: string,
+    selectedUserType: string
+  ): Data[] => {
+    return data.filter((item) => {
+      const matchesName =
+        criteria === "" ||
+        item.Name.toLowerCase().startsWith(criteria.toLowerCase());
+      const matchesUserType =
+        selectedUserType === "" || item.UserType === selectedUserType;
+      return matchesName && matchesUserType;
+    });
+  };
 
   const handleSetCriteria = (criteria: string) => {
     setCriteria(criteria);
@@ -145,15 +144,10 @@ const MyComponent: React.FC = () => {
                   </div>
                 </div>
                 <UserTable
-                  data={filteredData}
+                  data={handleFilteredData(data, criteria, selectedUserType)}
                   selectedItem={selectedItem}
                   onChangeSelectedItem={handleSetSelectedItem}
                 />
-                {noResults && (
-                  <div style={{ textAlign: "center", margin: "20px 0" }}>
-                    <h2>User not found...</h2>
-                  </div>
-                )}
               </div>
             </div>
           </div>

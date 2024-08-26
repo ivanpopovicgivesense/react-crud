@@ -1,47 +1,19 @@
 import React from "react";
 import { Button, Input, Label, Spinner } from "@fluentui/react-components";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useGetUser } from "../api/useGetUser";
+import { useUpdateForm } from "../api/useUpdateForm";
 import { useParams } from "react-router-dom";
-import { useGetUsers } from "../api/useGetUsers";
 
 export const UpdateUserForm: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
-  const { API_URL } = useGetUsers();
   const {
+    formData,
     isLoading,
     error,
-    setIsLoading,
-    setError,
     setFormData,
-    formData,
-    initFormData,
-  } = useGetUser(userId);
-
-  const navigate = useNavigate();
-
-  const isFormValid = (): boolean => {
-    return (
-      initFormData?.Name !== formData?.Name ||
-      initFormData?.Surname !== formData?.Surname ||
-      initFormData?.Address !== formData?.Address ||
-      initFormData?.CreatedDate !== formData?.CreatedDate ||
-      initFormData?.UserType !== formData?.UserType ||
-      initFormData?.City !== formData?.City
-    );
-  };
-
-  const handleSubmit = () => {
-    if (!formData || !userId) return;
-
-    setIsLoading(true);
-    axios
-      .put(`${API_URL}/${userId}`, formData)
-      .then(() => navigate("/"))
-      .catch((err) => setError(err.message))
-      .finally(() => setIsLoading(false));
-  };
+    isFormChanged,
+    handleSubmit,
+    navigate,
+  } = useUpdateForm(userId);
 
   return (
     <>
@@ -65,8 +37,8 @@ export const UpdateUserForm: React.FC = () => {
           <Label htmlFor="name">Name:</Label>
           <Input
             type="text"
-            name="Name"
-            value={formData.Name}
+            name="ime"
+            value={formData.ime || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
@@ -76,8 +48,8 @@ export const UpdateUserForm: React.FC = () => {
           <Label htmlFor="surname">Surname:</Label>
           <Input
             type="text"
-            name="Surname"
-            value={formData.Surname}
+            name="prezime"
+            value={formData.prezime || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
@@ -87,8 +59,8 @@ export const UpdateUserForm: React.FC = () => {
           <Label htmlFor="userType">User Type:</Label>
           <Input
             type="text"
-            name="UserType"
-            value={formData.UserType}
+            name="tipKorisnika"
+            value={formData.tipKorisnika || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
@@ -98,8 +70,8 @@ export const UpdateUserForm: React.FC = () => {
           <Label htmlFor="date">Created Date:</Label>
           <Input
             type="date"
-            name="CreatedDate"
-            value={formData.CreatedDate}
+            name="datumRodjenja"
+            value={formData.datumRodjenja || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
@@ -109,8 +81,8 @@ export const UpdateUserForm: React.FC = () => {
           <Label htmlFor="city">City:</Label>
           <Input
             type="text"
-            name="City"
-            value={formData.City}
+            name="grad"
+            value={formData.grad || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
@@ -120,19 +92,19 @@ export const UpdateUserForm: React.FC = () => {
           <Label htmlFor="address">Address:</Label>
           <Input
             type="text"
-            name="Address"
-            value={formData.Address}
+            name="adresa"
+            value={formData.adresa || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
           />
           <br />
           <br />
-          <div>
+          <div style={{ display: "flex", gap: "20px" }}>
             <Button
               type="submit"
               appearance="primary"
-              disabled={!isFormValid()}
+              disabled={!isFormChanged}
             >
               Update
             </Button>

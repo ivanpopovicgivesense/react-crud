@@ -116,7 +116,7 @@ export const CreateUserForm: React.FC = () => {
           />
           <br />
           <br />
-          <div>
+          <div style={{ display: "flex", gap: "20px" }}>
             <Button
               type="submit"
               appearance="primary"
