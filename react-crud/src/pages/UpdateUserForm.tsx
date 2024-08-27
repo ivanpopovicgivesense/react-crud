@@ -34,66 +34,66 @@ export const UpdateUserForm: React.FC = () => {
           }}
           onSubmit={handleSubmit}
         >
-          <Label htmlFor="name">Name:</Label>
+          <Label htmlFor="ime">Name:</Label>
           <Input
             type="text"
-            name="ime"
-            value={formData.ime || ""}
+            name="Name"
+            value={formData.Name || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
           />
           <br />
           <br />
-          <Label htmlFor="surname">Surname:</Label>
+          <Label htmlFor="prezime">Surname:</Label>
           <Input
             type="text"
-            name="prezime"
-            value={formData.prezime || ""}
+            name="Surname"
+            value={formData.Surname || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
           />
           <br />
           <br />
-          <Label htmlFor="userType">User Type:</Label>
+          <Label htmlFor="tipKorisnika">User Type:</Label>
           <Input
             type="text"
-            name="tipKorisnika"
-            value={formData.tipKorisnika || ""}
+            name="UserType"
+            value={formData.UserType || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
           />
           <br />
           <br />
-          <Label htmlFor="date">Created Date:</Label>
+          <Label htmlFor="datumRodjenja">Created Date:</Label>
           <Input
             type="date"
-            name="datumRodjenja"
-            value={formData.datumRodjenja || ""}
+            name="CreatedDate"
+            value={formData.CreatedDate || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
           />
           <br />
           <br />
-          <Label htmlFor="city">City:</Label>
+          <Label htmlFor="grad">City:</Label>
           <Input
             type="text"
-            name="grad"
-            value={formData.grad || ""}
+            name="City"
+            value={formData.City || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }
           />
           <br />
           <br />
-          <Label htmlFor="address">Address:</Label>
+          <Label htmlFor="adresa">Address:</Label>
           <Input
             type="text"
-            name="adresa"
-            value={formData.adresa || ""}
+            name="Address"
+            value={formData.Address || ""}
             onChange={(e) =>
               setFormData({ ...formData, [e.target.name]: e.target.value })
             }

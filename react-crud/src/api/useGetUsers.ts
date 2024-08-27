@@ -1,36 +1,31 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Data } from "../App";
 import { Error } from "../App";
 
-export const useGetUsers = () => {
-  const [data, setData] = useState<Data[]>([]);
+export const useGetUsers = <T>(url: string) => {
+  const [data, setData] = useState<T | []>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const API_URL = "http://localhost:3000/person";
-
-  const fetchUsers = () => {
+  useEffect(() => {
     setIsLoading(true);
+    setError(null);
     axios
-      .get(API_URL)
-      .then((response) => setData(response.data))
+      .get<T>(url)
+      .then((response) => {
+        console.log(response.data);
+        setData(response.data);
+      })
       .catch((error) => setError(error))
       .finally(() => setIsLoading(false));
-  };
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  }, [url]);
 
   return {
-    fetchUsers,
     data,
     setData,
     isLoading,
     setIsLoading,
     setError,
     error,
-    API_URL,
   };
 };

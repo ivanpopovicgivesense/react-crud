@@ -7,10 +7,10 @@ import { useNavigate } from "react-router-dom";
 type FormValue = {
   ime: string | null;
   prezime: string | null;
-  datumRodjenja: string | null;
-  tipKorisnika: string | null;
-  grad: string | null;
   adresa: string | null;
+  grad: string | null;
+  tipKorisnika: string | null;
+  datumRodjenja: string | null;
 };
 
 const initFormValue = ({
@@ -23,24 +23,17 @@ const initFormValue = ({
 }: Data): FormValue => ({
   ime: Name,
   prezime: Surname,
-  datumRodjenja: CreatedDate,
-  tipKorisnika: UserType,
-  grad: City,
   adresa: Address,
+  grad: City,
+  tipKorisnika: UserType,
+  datumRodjenja: CreatedDate,
 });
 
 export const useUpdateForm = (id: string | undefined) => {
-  const { API_URL } = useGetUsers();
+  const API_URL = "http://localhost:3000/person";
+  useGetUsers(API_URL);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [formData, setFormData] = useState<FormValue>({
-    ime: "",
-    prezime: "",
-    datumRodjenja: "",
-    tipKorisnika: "",
-    grad: "",
-    adresa: "",
-  });
   const [original, setOriginal] = useState<Data>({
     id: "",
     Name: "",
@@ -51,6 +44,15 @@ export const useUpdateForm = (id: string | undefined) => {
     CreatedDate: "",
   });
 
+  const [formData, setFormData] = useState<Data>({
+    id: "",
+    Name: "",
+    Surname: "",
+    Address: "",
+    City: "",
+    UserType: "",
+    CreatedDate: "",
+  });
   const navigate = useNavigate();
 
   const fetchUser = useCallback(() => {
@@ -59,12 +61,13 @@ export const useUpdateForm = (id: string | undefined) => {
     axios
       .get<Data>(`${API_URL}/${id}`)
       .then((response) => {
-        setFormData(initFormValue(response.data));
+        console.log("fetched User Data:", response.data);
+        setFormData(response.data);
         setOriginal(response.data);
       })
       .catch((err) => setError(err.message))
       .finally(() => setIsLoading(false));
-  }, [id, setIsLoading, setError, API_URL]);
+  }, [id, setIsLoading, setError]);
 
   useEffect(() => {
     if (id) {
@@ -85,7 +88,10 @@ export const useUpdateForm = (id: string | undefined) => {
     setIsLoading(true);
     axios
       .put(`${API_URL}/${id}`, formData)
-      .then(() => navigate("/"))
+      .then((response) => {
+        console.log("updated User Data:", response.data);
+        navigate("/");
+      })
       .catch((err) => setError(err.message))
       .finally(() => setIsLoading(false));
   };

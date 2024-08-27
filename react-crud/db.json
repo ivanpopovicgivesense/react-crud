@@ -1,67 +1,19 @@
 {
   "person": [
     {
-      "Name": "John",
-      "Surname": "Doe",
+      "ime": "Noah",
+      "prezime": "Young123",
+      "adresa": "Address 890",
+      "grad": "Dallas",
+      "tipKorisnika": "Premium",
+      "datumRodjenja": "2022-11-17",
+      "id": "8764",
+      "Name": "123",
+      "Surname": "123",
       "UserType": "Administrator",
-      "CreatedDate": "2024-08-08",
-      "City": "Washington DC",
-      "Address": "Address 123",
-      "id": "4444"
-    },
-    {
-      "Name": "Michael",
-      "Surname": "Blue",
-      "UserType": "Premium",
-      "CreatedDate": "2022-05-14",
-      "City": "Cleveland",
-      "Address": "Address 567",
-      "id": "7325"
-    },
-    {
-      "Name": "Laura1",
-      "Surname": "Davis",
-      "UserType": "Standard",
-      "CreatedDate": "2024-01-10",
-      "City": "Seattle",
-      "Address": "Address 910",
-      "id": "7890"
-    },
-    {
-      "Name": "James",
-      "Surname": "Wilson",
-      "UserType": "Premium",
-      "CreatedDate": "2022-07-19",
-      "City": "Houston",
-      "Address": "Address 234",
-      "id": "3456"
-    },
-    {
-      "Name": "Ava",
-      "Surname": "Clark",
-      "UserType": "Premium",
-      "CreatedDate": "2023-09-12",
-      "City": "San Diego",
-      "Address": "Address 567",
-      "id": "5432"
-    },
-    {
-      "Name": "Mia",
-      "Surname": "Walker",
-      "UserType": "Administrator",
-      "CreatedDate": "2021-12-01",
-      "City": "Boston",
-      "Address": "Address 789",
-      "id": "3457"
-    },
-    {
-      "Name": "Noah",
-      "Surname": "Young",
-      "UserType": "Premium",
-      "CreatedDate": "2022-11-17",
-      "City": "Dallas",
-      "Address": "Address 890",
-      "id": "8764"
+      "City": "123",
+      "Address": "112",
+      "CreatedDate": "2222-11-11"
     },
     {
       "Name": "Isabella",
@@ -80,6 +32,15 @@
       "CreatedDate": "2024-08-14",
       "City": "Trstenik",
       "Address": "K. Milice 70/4"
+    },
+    {
+      "id": "5e3d",
+      "Name": "John",
+      "Surname": "Smith",
+      "UserType": "Standard",
+      "CreatedDate": "2024-08-27",
+      "City": "Atlanta",
+      "Address": "Street 12"
     }
   ]
 }

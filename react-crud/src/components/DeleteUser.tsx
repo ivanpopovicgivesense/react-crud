@@ -27,13 +27,13 @@ const DeleteUser: React.FC<DeleteUserProps> = ({
   usersArr,
   setSelectedItem,
 }) => {
-  const { API_URL, setData } = useGetUsers();
+  const { setData } = useGetUsers("http://localhost:3000/person");
 
   const navigate = useNavigate();
 
   const deleteUser = (id: string | null) => {
     axios
-      .delete(`${API_URL}/${id}`)
+      .delete(`http://localhost:3000/person/${id}`)
       .then(() => {
         setData(usersArr.filter((user) => user.id !== id));
         console.log(`User with an id of ${id} was successfully deleted!`);

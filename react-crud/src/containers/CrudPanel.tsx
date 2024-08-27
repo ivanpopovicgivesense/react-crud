@@ -4,11 +4,10 @@ import ViewUser from "../components/ViewUser";
 import { Data } from "../App";
 import { DualScreenUpdateFilled as UpdateIcon } from "@fluentui/react-icons";
 type CrudPanelProps = {
-  data: Data;
+  data: Data | null;
   usersArr: Data[];
   selectedItem: string | null;
   pregledIsOpen: boolean;
-  fetchUsers: () => void;
   setData: (usersArr: Data[]) => void;
   onEditUser: (user: Data) => void;
   setSelectedItem: (selectedItem: string | null) => void;
@@ -23,7 +22,7 @@ const CrudPanel: React.FC<CrudPanelProps> = ({
   setData,
   usersArr,
 }) => {
-  if (!data) {
+  if (!data || !data.id) {
     return null;
   }
   return (

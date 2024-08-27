@@ -26,7 +26,9 @@ export type Error = {
 };
 
 const MyComponent: React.FC = () => {
-  const { data, setData, isLoading, error, fetchUsers } = useGetUsers();
+  const { data, setData, isLoading, error } = useGetUsers<Data[]>(
+    "http://localhost:3000/person"
+  );
   const [pregledIsOpen, setPregledIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<null | string>(null);
   const [criteria, setCriteria] = useState<string>("");
@@ -105,7 +107,7 @@ const MyComponent: React.FC = () => {
                       onChange={handleSetCriteria}
                     />
                     <FilterByUserType
-                      data={data}
+                      data={data!}
                       selectedUserType={selectedUserType}
                       onChange={handleUserTypeChange}
                     />
@@ -120,15 +122,13 @@ const MyComponent: React.FC = () => {
                   >
                     <CrudPanel
                       data={
-                        data.find((item) => item.id === selectedItem) ||
-                        ({} as Data)
+                        data.find((item) => item.id === selectedItem) || null
                       }
                       onEditUser={handleEditUser}
                       setSelectedItem={setSelectedItem}
                       selectedItem={selectedItem}
                       pregledIsOpen={pregledIsOpen}
-                      fetchUsers={fetchUsers}
-                      usersArr={data}
+                      usersArr={data!}
                       setData={setData}
                     />
                     <CreateIcon
@@ -144,7 +144,7 @@ const MyComponent: React.FC = () => {
                   </div>
                 </div>
                 <UserTable
-                  data={handleFilteredData(data, criteria, selectedUserType)}
+                  data={handleFilteredData(data!, criteria, selectedUserType)}
                   selectedItem={selectedItem}
                   onChangeSelectedItem={handleSetSelectedItem}
                 />

@@ -26,12 +26,15 @@ const UserTable: React.FC<UserTableProps> = React.memo(
 
       return `${day}.${month}.${year}`;
     };
-    if (data.length === 0)
+
+    if (data.length === 0) {
       return (
         <div style={{ textAlign: "center", margin: "20px 0" }}>
           <h2>User not found...</h2>
         </div>
       );
+    }
+
     return (
       <div style={{ flex: 1, padding: "10px" }}>
         <Table>
@@ -58,12 +61,12 @@ const UserTable: React.FC<UserTableProps> = React.memo(
               <TableHeaderCell
                 style={{ fontSize: "16px", textAlign: "center" }}
               >
-                <strong>User Type</strong>
+                <strong>User type</strong>
               </TableHeaderCell>
               <TableHeaderCell
                 style={{ fontSize: "16px", textAlign: "center" }}
               >
-                <strong>Created Date</strong>
+                <strong>Date of birth</strong>
               </TableHeaderCell>
               <TableHeaderCell
                 style={{ fontSize: "16px", textAlign: "center" }}
@@ -88,10 +91,7 @@ const UserTable: React.FC<UserTableProps> = React.memo(
                   }}
                 >
                   <TableCell>
-                    <Checkbox
-                      checked={id === selectedItem}
-                      shape="circular"
-                    ></Checkbox>
+                    <Checkbox checked={id === selectedItem} shape="circular" />
                   </TableCell>
                   <TableCell>
                     <TableCellLayout>{id}</TableCellLayout>
