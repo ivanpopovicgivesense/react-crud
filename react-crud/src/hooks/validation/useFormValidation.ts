@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Data } from "../../../App";
+import { Data } from "../../App";
 
 export type FormValues = {
   Name: string;

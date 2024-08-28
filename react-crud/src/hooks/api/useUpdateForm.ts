@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
 import { Data } from "../../App";
 import { useNavigate } from "react-router-dom";
-import { useFormValidation } from "./validation/useFormValidation";
+import { useFormValidation } from "../validation/useFormValidation";
 
 export type FormValue = {
   ime: string | null;
