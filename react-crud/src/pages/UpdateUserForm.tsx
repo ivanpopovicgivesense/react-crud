@@ -2,12 +2,12 @@ import React from "react";
 import { Button, Input, Label, Spinner } from "@fluentui/react-components";
 import { useUpdateForm } from "../hooks/api/useUpdateForm";
 import { useParams } from "react-router-dom";
-import { useFormValidation } from "../hooks/validation/useFormValidation";
+import { useUpdateFormValidation } from "../hooks/validation/useUpdateFormValidation";
 
 export const UpdateUserForm: React.FC = () => {
   const { userId } = useParams<{ userId: string }>();
   const { touched, setTouched, errors, setErrors, validate } =
-    useFormValidation();
+    useUpdateFormValidation();
   const {
     formData,
     isLoading,

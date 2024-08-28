@@ -13,7 +13,7 @@ export type FormValues = {
 type Errors = Partial<Record<keyof Data, string>>;
 type Touched = Partial<Record<keyof Data, boolean>>;
 
-export const useFormValidation = () => {
+export const useUpdateFormValidation = () => {
   const [errors, setErrors] = useState<Errors>({});
   const [touched, setTouched] = useState<Touched>({});
 

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
 import { Data } from "../../App";
 import { useNavigate } from "react-router-dom";
-import { useFormValidation } from "../validation/useFormValidation";
+import { useUpdateFormValidation } from "../validation/useUpdateFormValidation";
 
 export type FormValue = {
   ime: string | null;
@@ -14,7 +14,7 @@ export type FormValue = {
 };
 
 export const useUpdateForm = (id: string | undefined) => {
-  const { errors } = useFormValidation();
+  const { errors } = useUpdateFormValidation();
   const API_URL = "http://localhost:3000/person";
 
   const [isLoading, setIsLoading] = useState<boolean>(false);

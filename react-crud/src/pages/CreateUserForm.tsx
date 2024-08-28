@@ -2,58 +2,22 @@ import React, { useState } from "react";
 import { Button, Input, Label, Spinner } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-interface FormValues {
-  Name: string;
-  Surname: string;
-  UserType: string;
-  CreatedDate: string;
-  City: string;
-  Address: string;
-}
+import { useCreateFormValidation } from "../hooks/validation/useCreateFormValidation";
 
 export const CreateUserForm: React.FC = () => {
+  const {
+    errors,
+    setErrors,
+    validate,
+    handleChange,
+    handleBlur,
+    formData,
+    isFormValid,
+  } = useCreateFormValidation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [errors, setErrors] = useState<Partial<FormValues>>({});
-  const [formData, setFormData] = useState<FormValues>({
-    Name: "",
-    Surname: "",
-    UserType: "",
-    CreatedDate: "",
-    City: "",
-    Address: "",
-  });
 
   const API_URL = "http://localhost:3000/person/";
   const navigate = useNavigate();
-
-  const validate = (values: FormValues) => {
-    const errors: Partial<FormValues> = {};
-    if (!values.Name) errors.Name = "Name is required.";
-    if (!values.Surname) errors.Surname = "Surname is required.";
-    if (!values.UserType) errors.UserType = "User Type is required.";
-    if (!values.CreatedDate) errors.CreatedDate = "Created Date is required.";
-    if (!values.City) errors.City = "City is required.";
-    if (!values.Address) errors.Address = "Address is required.";
-    return errors;
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: "",
-    }));
-  };
-
-  const handleBlur = () => {
-    const validationErrors = validate(formData);
-    setErrors(validationErrors);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,10 +37,6 @@ export const CreateUserForm: React.FC = () => {
       .catch((error) => console.error(`Error creating user: ${error}`))
       .finally(() => setIsLoading(false));
   };
-
-  const isFormValid =
-    Object.values(formData).every((field) => field.trim() !== "") &&
-    Object.keys(errors).length === 0;
 
   return (
     <div
