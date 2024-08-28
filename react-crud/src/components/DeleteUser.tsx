@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import { Data } from "../App";
 import { DeleteFilled as DeleteIcon } from "@fluentui/react-icons";
-import { useGetUsers } from "../api/useGetUsers";
+import { useGetUsers } from "../hooks/api/useGetUsers";
 import { useNavigate } from "react-router-dom";
 
 type DeleteUserProps = {

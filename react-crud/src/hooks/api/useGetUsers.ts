@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Error } from "../App";
+import { Error } from "../../App";
 
 export const useGetUsers = <T>(url: string) => {
   const [data, setData] = useState<T | []>([]);

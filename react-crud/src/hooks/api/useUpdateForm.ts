@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
-import { Data } from "../App";
-import { useGetUsers } from "./useGetUsers";
+import { Data } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { useFormValidation } from "./validation/useFormValidation";
 
-type FormValue = {
+export type FormValue = {
   ime: string | null;
   prezime: string | null;
   adresa: string | null;
@@ -30,8 +30,9 @@ const initFormValue = ({
 });
 
 export const useUpdateForm = (id: string | undefined) => {
+  const { errors } = useFormValidation();
   const API_URL = "http://localhost:3000/person";
-  useGetUsers(API_URL);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
   const [original, setOriginal] = useState<Data>({
@@ -53,6 +54,7 @@ export const useUpdateForm = (id: string | undefined) => {
     UserType: "",
     CreatedDate: "",
   });
+
   const navigate = useNavigate();
 
   const fetchUser = useCallback(() => {
@@ -84,16 +86,17 @@ export const useUpdateForm = (id: string | undefined) => {
 
   const handleSubmit = () => {
     if (!formData || !id) return;
-
-    setIsLoading(true);
-    axios
-      .put(`${API_URL}/${id}`, formData)
-      .then((response) => {
-        console.log("updated User Data:", response.data);
-        navigate("/");
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setIsLoading(false));
+    if (Object.keys(errors).length === 0) {
+      setIsLoading(true);
+      axios
+        .put(`${API_URL}/${id}`, formData)
+        .then((response) => {
+          console.log("updated User Data:", response.data);
+          navigate("/");
+        })
+        .catch((err) => setError(err.message))
+        .finally(() => setIsLoading(false));
+    }
   };
 
   return {
@@ -106,5 +109,6 @@ export const useUpdateForm = (id: string | undefined) => {
     isFormChanged,
     handleSubmit,
     navigate,
+    errors,
   };
 };

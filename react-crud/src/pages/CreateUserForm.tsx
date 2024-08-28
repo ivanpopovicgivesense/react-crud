@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { Button, Input, Label, Spinner } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useFormValidation } from "../hooks/api/validation/useFormValidation";
+import { FormValues } from "../hooks/api/validation/useFormValidation";
 
 export const CreateUserForm: React.FC = () => {
+  const { touched, setTouched, errors, setErrors, validate } =
+    useFormValidation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormValues>({
     Name: "",
     Surname: "",
     UserType: "",
@@ -55,10 +59,17 @@ export const CreateUserForm: React.FC = () => {
             type="text"
             name="Name"
             value={formData.Name}
-            onChange={(e) =>
-              setFormData({ ...formData, [e.target.name]: e.target.value })
-            }
+            onBlur={() => setTouched({ ...touched, Name: true })}
+            onChange={(e) => {
+              setFormData({ ...formData, [e.target.name]: e.target.value });
+              setErrors(
+                validate({ ...formData, [e.target.name]: e.target.value })
+              );
+            }}
           />
+          {errors.Name && touched.Name && (
+            <p style={{ color: "red" }}>{errors.Name}</p>
+          )}
           <br />
           <br />
           <Label htmlFor="surname">Surname:</Label>
@@ -66,10 +77,17 @@ export const CreateUserForm: React.FC = () => {
             type="text"
             name="Surname"
             value={formData.Surname}
-            onChange={(e) =>
-              setFormData({ ...formData, [e.target.name]: e.target.value })
-            }
+            onBlur={() => setTouched({ ...touched, Surname: true })}
+            onChange={(e) => {
+              setFormData({ ...formData, [e.target.name]: e.target.value });
+              setErrors(
+                validate({ ...formData, [e.target.name]: e.target.value })
+              );
+            }}
           />
+          {errors.Surname && touched.Surname && (
+            <p style={{ color: "red" }}>{errors.Surname}</p>
+          )}
           <br />
           <br />
           <Label htmlFor="userType">User Type:</Label>
@@ -77,10 +95,17 @@ export const CreateUserForm: React.FC = () => {
             type="text"
             name="UserType"
             value={formData.UserType}
-            onChange={(e) =>
-              setFormData({ ...formData, [e.target.name]: e.target.value })
-            }
+            onBlur={() => setTouched({ ...touched, UserType: true })}
+            onChange={(e) => {
+              setFormData({ ...formData, [e.target.name]: e.target.value });
+              setErrors(
+                validate({ ...formData, [e.target.name]: e.target.value })
+              );
+            }}
           />
+          {errors.UserType && touched.UserType && (
+            <p style={{ color: "red" }}>{errors.UserType}</p>
+          )}
           <br />
           <br />
           <Label htmlFor="date">Created Date:</Label>
@@ -88,10 +113,17 @@ export const CreateUserForm: React.FC = () => {
             type="date"
             name="CreatedDate"
             value={formData.CreatedDate}
-            onChange={(e) =>
-              setFormData({ ...formData, [e.target.name]: e.target.value })
-            }
+            onBlur={() => setTouched({ ...touched, CreatedDate: true })}
+            onChange={(e) => {
+              setFormData({ ...formData, [e.target.name]: e.target.value });
+              setErrors(
+                validate({ ...formData, [e.target.name]: e.target.value })
+              );
+            }}
           />
+          {errors.CreatedDate && touched.CreatedDate && (
+            <p style={{ color: "red" }}>{errors.CreatedDate}</p>
+          )}
           <br />
           <br />
           <Label htmlFor="city">City:</Label>
@@ -99,10 +131,17 @@ export const CreateUserForm: React.FC = () => {
             type="text"
             name="City"
             value={formData.City}
-            onChange={(e) =>
-              setFormData({ ...formData, [e.target.name]: e.target.value })
-            }
+            onBlur={() => setTouched({ ...touched, City: true })}
+            onChange={(e) => {
+              setFormData({ ...formData, [e.target.name]: e.target.value });
+              setErrors(
+                validate({ ...formData, [e.target.name]: e.target.value })
+              );
+            }}
           />
+          {errors.City && touched.City && (
+            <p style={{ color: "red" }}>{errors.City}</p>
+          )}
           <br />
           <br />
           <Label htmlFor="address">Address:</Label>
@@ -110,10 +149,17 @@ export const CreateUserForm: React.FC = () => {
             type="text"
             name="Address"
             value={formData.Address}
-            onChange={(e) =>
-              setFormData({ ...formData, [e.target.name]: e.target.value })
-            }
+            onBlur={() => setTouched({ ...touched, Address: true })}
+            onChange={(e) => {
+              setFormData({ ...formData, [e.target.name]: e.target.value });
+              setErrors(
+                validate({ ...formData, [e.target.name]: e.target.value })
+              );
+            }}
           />
+          {errors.Address && touched.Address && (
+            <p style={{ color: "red" }}>{errors.Address}</p>
+          )}
           <br />
           <br />
           <div style={{ display: "flex", gap: "20px" }}>
@@ -124,8 +170,8 @@ export const CreateUserForm: React.FC = () => {
                 !formData.Name ||
                 !formData.Surname ||
                 !formData.UserType ||
-                !formData.City ||
                 !formData.CreatedDate ||
+                !formData.City ||
                 !formData.Address
               }
             >

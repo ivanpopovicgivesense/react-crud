@@ -7,7 +7,7 @@ import FilterByUserType from "./components/FilterByUserType";
 import ErrorMessage from "./components/ErrorMessage";
 import CrudPanel from "./containers/CrudPanel";
 import NavigationBar from "./components/NavigationBar";
-import { useGetUsers } from "./api/useGetUsers";
+import { useGetUsers } from "./hooks/api/useGetUsers";
 import { AddFilled as CreateIcon } from "@fluentui/react-icons";
 
 export type Data = {
