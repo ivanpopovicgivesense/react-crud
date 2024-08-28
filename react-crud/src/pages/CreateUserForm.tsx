@@ -2,13 +2,19 @@ import React, { useState } from "react";
 import { Button, Input, Label, Spinner } from "@fluentui/react-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useFormValidation } from "../hooks/validation/useFormValidation";
-import { FormValues } from "../hooks/validation/useFormValidation";
+
+interface FormValues {
+  Name: string;
+  Surname: string;
+  UserType: string;
+  CreatedDate: string;
+  City: string;
+  Address: string;
+}
 
 export const CreateUserForm: React.FC = () => {
-  const { touched, setTouched, errors, setErrors, validate } =
-    useFormValidation();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errors, setErrors] = useState<Partial<FormValues>>({});
   const [formData, setFormData] = useState<FormValues>({
     Name: "",
     Surname: "",
@@ -21,8 +27,26 @@ export const CreateUserForm: React.FC = () => {
   const API_URL = "http://localhost:3000/person/";
   const navigate = useNavigate();
 
+  const validate = (values: FormValues) => {
+    const errors: Partial<FormValues> = {};
+    if (!values.Name) errors.Name = "Name is required.";
+    if (!values.Surname) errors.Surname = "Surname is required.";
+    if (!values.UserType) errors.UserType = "User Type is required.";
+    if (!values.CreatedDate) errors.CreatedDate = "Created Date is required.";
+    if (!values.City) errors.City = "City is required.";
+    if (!values.Address) errors.Address = "Address is required.";
+    return errors;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const validationErrors = validate(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
     setIsLoading(true);
     axios
       .post(API_URL, formData)
@@ -32,6 +56,18 @@ export const CreateUserForm: React.FC = () => {
       .then(() => navigate("/"))
       .catch((error) => console.error(`Error creating user: ${error}`))
       .finally(() => setIsLoading(false));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
 
   return (
@@ -80,21 +116,10 @@ export const CreateUserForm: React.FC = () => {
                   type="text"
                   name="Name"
                   value={formData.Name}
-                  onBlur={() => setTouched({ ...touched, Name: true })}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      [e.target.name]: e.target.value,
-                    });
-                    setErrors(
-                      validate({ ...formData, [e.target.name]: e.target.value })
-                    );
-                  }}
+                  onChange={handleChange}
                   style={{ width: "100%", marginBottom: "10px" }}
                 />
-                {errors.Name && touched.Name && (
-                  <p style={{ color: "red" }}>{errors.Name}</p>
-                )}
+                {errors.Name && <p style={{ color: "red" }}>{errors.Name}</p>}
               </div>
               <div style={{ flex: 1 }}>
                 <Label htmlFor="surname">Surname:</Label>
@@ -102,19 +127,10 @@ export const CreateUserForm: React.FC = () => {
                   type="text"
                   name="Surname"
                   value={formData.Surname}
-                  onBlur={() => setTouched({ ...touched, Surname: true })}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      [e.target.name]: e.target.value,
-                    });
-                    setErrors(
-                      validate({ ...formData, [e.target.name]: e.target.value })
-                    );
-                  }}
+                  onChange={handleChange}
                   style={{ width: "100%", marginBottom: "10px" }}
                 />
-                {errors.Surname && touched.Surname && (
+                {errors.Surname && (
                   <p style={{ color: "red" }}>{errors.Surname}</p>
                 )}
               </div>
@@ -127,19 +143,10 @@ export const CreateUserForm: React.FC = () => {
                   type="text"
                   name="UserType"
                   value={formData.UserType}
-                  onBlur={() => setTouched({ ...touched, UserType: true })}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      [e.target.name]: e.target.value,
-                    });
-                    setErrors(
-                      validate({ ...formData, [e.target.name]: e.target.value })
-                    );
-                  }}
+                  onChange={handleChange}
                   style={{ width: "100%", marginBottom: "10px" }}
                 />
-                {errors.UserType && touched.UserType && (
+                {errors.UserType && (
                   <p style={{ color: "red" }}>{errors.UserType}</p>
                 )}
               </div>
@@ -149,19 +156,10 @@ export const CreateUserForm: React.FC = () => {
                   type="date"
                   name="CreatedDate"
                   value={formData.CreatedDate}
-                  onBlur={() => setTouched({ ...touched, CreatedDate: true })}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      [e.target.name]: e.target.value,
-                    });
-                    setErrors(
-                      validate({ ...formData, [e.target.name]: e.target.value })
-                    );
-                  }}
+                  onChange={handleChange}
                   style={{ width: "100%", marginBottom: "10px" }}
                 />
-                {errors.CreatedDate && touched.CreatedDate && (
+                {errors.CreatedDate && (
                   <p style={{ color: "red" }}>{errors.CreatedDate}</p>
                 )}
               </div>
@@ -174,21 +172,10 @@ export const CreateUserForm: React.FC = () => {
                   type="text"
                   name="City"
                   value={formData.City}
-                  onBlur={() => setTouched({ ...touched, City: true })}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      [e.target.name]: e.target.value,
-                    });
-                    setErrors(
-                      validate({ ...formData, [e.target.name]: e.target.value })
-                    );
-                  }}
+                  onChange={handleChange}
                   style={{ width: "100%", marginBottom: "10px" }}
                 />
-                {errors.City && touched.City && (
-                  <p style={{ color: "red" }}>{errors.City}</p>
-                )}
+                {errors.City && <p style={{ color: "red" }}>{errors.City}</p>}
               </div>
               <div style={{ flex: 1 }}>
                 <Label htmlFor="address">Address:</Label>
@@ -196,19 +183,10 @@ export const CreateUserForm: React.FC = () => {
                   type="text"
                   name="Address"
                   value={formData.Address}
-                  onBlur={() => setTouched({ ...touched, Address: true })}
-                  onChange={(e) => {
-                    setFormData({
-                      ...formData,
-                      [e.target.name]: e.target.value,
-                    });
-                    setErrors(
-                      validate({ ...formData, [e.target.name]: e.target.value })
-                    );
-                  }}
+                  onChange={handleChange}
                   style={{ width: "100%", marginBottom: "10px" }}
                 />
-                {errors.Address && touched.Address && (
+                {errors.Address && (
                   <p style={{ color: "red" }}>{errors.Address}</p>
                 )}
               </div>
@@ -220,14 +198,10 @@ export const CreateUserForm: React.FC = () => {
               <Button
                 type="submit"
                 appearance="primary"
-                disabled={
-                  !formData.Name ||
-                  !formData.Surname ||
-                  !formData.UserType ||
-                  !formData.CreatedDate ||
-                  !formData.City ||
-                  !formData.Address
-                }
+                // disabled={
+                //   Object.values(formData).some((field) => !field) ||
+                //   Object.keys(errors).length > 0
+                // }
               >
                 Submit
               </Button>
