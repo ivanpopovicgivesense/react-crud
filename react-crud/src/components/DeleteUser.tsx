@@ -55,7 +55,7 @@ const DeleteUser: React.FC<DeleteUserProps> = ({
         <DialogSurface>
           <DialogBody>
             <DialogTitle>
-              Delete {users.Name} {users.Surname} (ID: {users.id})
+              Delete {users.Name} {users.Surname}
             </DialogTitle>
             <DialogContent>
               Are you sure you want to delete this user?

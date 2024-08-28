@@ -79,9 +79,16 @@ export const useUpdateForm = (id: string | undefined) => {
   }, [id, fetchUser, setIsLoading]);
 
   const isFormChanged = useMemo(() => {
-    return (
-      JSON.stringify(initFormValue(original!)) !== JSON.stringify(formData)
-    );
+    // Normalize values to ensure accurate comparison
+    const originalValues = {
+      ...original,
+      CreatedDate: new Date(original.CreatedDate).toString(),
+    };
+    const formDataValues = {
+      ...formData,
+      CreatedDate: new Date(formData.CreatedDate).toString(),
+    };
+    return JSON.stringify(originalValues) !== JSON.stringify(formDataValues);
   }, [original, formData]);
 
   const handleSubmit = () => {

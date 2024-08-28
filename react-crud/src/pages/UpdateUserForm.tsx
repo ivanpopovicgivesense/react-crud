@@ -204,7 +204,7 @@ export const UpdateUserForm: React.FC = () => {
               <Button
                 type="submit"
                 appearance="primary"
-                disabled={isFormChanged}
+                disabled={!isFormChanged}
               >
                 Update
               </Button>
