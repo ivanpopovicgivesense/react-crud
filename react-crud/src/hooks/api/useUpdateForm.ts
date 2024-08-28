@@ -13,22 +13,6 @@ export type FormValue = {
   datumRodjenja: string | null;
 };
 
-const initFormValue = ({
-  Name,
-  Surname,
-  Address,
-  City,
-  UserType,
-  CreatedDate,
-}: Data): FormValue => ({
-  ime: Name,
-  prezime: Surname,
-  adresa: Address,
-  grad: City,
-  tipKorisnika: UserType,
-  datumRodjenja: CreatedDate,
-});
-
 export const useUpdateForm = (id: string | undefined) => {
   const { errors } = useFormValidation();
   const API_URL = "http://localhost:3000/person";
@@ -79,7 +63,6 @@ export const useUpdateForm = (id: string | undefined) => {
   }, [id, fetchUser, setIsLoading]);
 
   const isFormChanged = useMemo(() => {
-    // Normalize values to ensure accurate comparison
     const originalValues = {
       ...original,
       CreatedDate: new Date(original.CreatedDate).toString(),
