@@ -26,10 +26,10 @@
     },
     {
       "id": "5915",
-      "Name": "Marko123",
+      "Name": "Marko1234567",
       "Surname": "Savic",
       "UserType": "Administrator",
-      "CreatedDate": "2024-08-14",
+      "CreatedDate": "2024-09-14",
       "City": "Trstenik",
       "Address": "K. Milice 70/4"
     },
@@ -41,6 +41,15 @@
       "CreatedDate": "2024-08-27",
       "City": "Atlanta",
       "Address": "Street 12"
+    },
+    {
+      "id": "9f0a",
+      "Name": "User",
+      "Surname": "User",
+      "UserType": "Administrator",
+      "CreatedDate": "2024-08-28",
+      "City": "Miami",
+      "Address": "Street 56"
     }
   ]
 }
