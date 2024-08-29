@@ -12,6 +12,7 @@ import {
   ReadingModeMobileFilled as ViewIcon,
   ArrowExitFilled as CloseIcon,
 } from "@fluentui/react-icons";
+import { dateFormatter } from "./UserTable";
 
 type ViewUserDialogueProps = {
   data: Data;
@@ -35,7 +36,7 @@ const ViewUserDialog: React.FC<ViewUserDialogueProps> = ({ data }) => {
             <h3>Name: {data.Name}</h3>
             <h3>Surname: {data.Surname}</h3>
             <h3>User Type: {data.UserType}</h3>
-            <h3>Created Date: {data.CreatedDate?.toString()}</h3>
+            <h3>Created Date: {dateFormatter(data.CreatedDate)}</h3>
             <h3>City: {data.City}</h3>
             <h3>Address: {data.Address}</h3>
           </DialogContent>
