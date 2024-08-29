@@ -6,6 +6,7 @@ import {
   SettingsRegular,
   SignOutRegular,
 } from "@fluentui/react-icons";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   sidebar: {
@@ -57,16 +58,22 @@ const useStyles = makeStyles({
 
 const sidebarItems = [
   { key: "home", icon: <HomeRegular />, text: "Dashboard" },
-  { key: "calendar", icon: <CalendarRegular />, text: "Calendar" },
+  {
+    key: "calendar",
+    icon: <CalendarRegular />,
+    text: "Calendar",
+  },
   { key: "settings", icon: <SettingsRegular />, text: "Settings" },
 ];
 
 const NavigationBar = () => {
   const [activeItem, setActiveItem] = useState<string>("home");
   const classes = useStyles();
+  const navigate = useNavigate();
 
   const handleItemClick = (key: string) => {
     setActiveItem(key);
+    if (key === "calendar") navigate("/calendar");
   };
 
   return (

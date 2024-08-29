@@ -6,7 +6,7 @@ import SearchFilter from "./components/SearchFilter";
 import FilterByUserType from "./components/FilterByUserType";
 import ErrorMessage from "./components/ErrorMessage";
 import CrudPanel from "./containers/CrudPanel";
-import NavigationBar from "./components/NavigationBar";
+import NavigationBar from "./containers/NavigationBar";
 import { useGetUsers } from "./hooks/api/useGetUsers";
 import { AddFilled as CreateIcon } from "@fluentui/react-icons";
 
