@@ -36,46 +36,50 @@ const UserTable: React.FC<UserTableProps> = React.memo(
     }
 
     return (
-      <div style={{ flex: 1, padding: "10px" }}>
-        <Table>
-          <TableHeader style={{ fontSize: "20px" }}>
+      <div
+        style={{
+          flex: 1,
+          padding: "20px",
+          borderRadius: "8px",
+          background: "#ffffff",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Table
+          style={{
+            borderCollapse: "collapse",
+            width: "100%",
+          }}
+        >
+          <TableHeader
+            style={{
+              fontSize: "18px",
+              borderBottom: "2px solid #e0e0e0",
+            }}
+          >
             <TableRow>
               <TableHeaderCell
-                style={{ fontSize: "16px", textAlign: "center" }}
+                style={{ textAlign: "center" }}
               ></TableHeaderCell>
-              <TableHeaderCell
-                style={{ fontSize: "16px", textAlign: "center" }}
-              >
+              <TableHeaderCell style={{ textAlign: "center" }}>
                 <strong>ID</strong>
               </TableHeaderCell>
-              <TableHeaderCell
-                style={{ fontSize: "16px", textAlign: "center" }}
-              >
+              <TableHeaderCell style={{ textAlign: "center" }}>
                 <strong>Name</strong>
               </TableHeaderCell>
-              <TableHeaderCell
-                style={{ fontSize: "16px", textAlign: "center" }}
-              >
+              <TableHeaderCell style={{ textAlign: "center" }}>
                 <strong>Surname</strong>
               </TableHeaderCell>
-              <TableHeaderCell
-                style={{ fontSize: "16px", textAlign: "center" }}
-              >
+              <TableHeaderCell style={{ textAlign: "center" }}>
                 <strong>User type</strong>
               </TableHeaderCell>
-              <TableHeaderCell
-                style={{ fontSize: "16px", textAlign: "center" }}
-              >
+              <TableHeaderCell style={{ textAlign: "center" }}>
                 <strong>Date of birth</strong>
               </TableHeaderCell>
-              <TableHeaderCell
-                style={{ fontSize: "16px", textAlign: "center" }}
-              >
+              <TableHeaderCell style={{ textAlign: "center" }}>
                 <strong>City</strong>
               </TableHeaderCell>
-              <TableHeaderCell
-                style={{ fontSize: "16px", textAlign: "center" }}
-              >
+              <TableHeaderCell style={{ textAlign: "center" }}>
                 <strong>Address</strong>
               </TableHeaderCell>
             </TableRow>
@@ -87,8 +91,18 @@ const UserTable: React.FC<UserTableProps> = React.memo(
                   key={id}
                   onClick={() => onChangeSelectedItem(id)}
                   style={{
-                    backgroundColor: id === selectedItem ? "#DDD" : "#FFF",
+                    backgroundColor:
+                      id === selectedItem ? "#e3f2fd" : "#ffffff",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s",
                   }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.backgroundColor = "#f1f8e9")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.backgroundColor =
+                      id === selectedItem ? "#e3f2fd" : "#ffffff")
+                  }
                 >
                   <TableCell>
                     <Checkbox checked={id === selectedItem} shape="circular" />
