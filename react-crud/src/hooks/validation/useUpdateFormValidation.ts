@@ -7,7 +7,7 @@ export type FormValues = {
   UserType: string;
   City: string;
   Address: string;
-  CreatedDate: string;
+  CreatedDate: Date | undefined;
 };
 
 type Errors = Partial<Record<keyof Data, string>>;

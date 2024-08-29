@@ -10,7 +10,7 @@ export type FormValue = {
   adresa: string | null;
   grad: string | null;
   tipKorisnika: string | null;
-  datumRodjenja: string | null;
+  datumRodjenja: Date | undefined;
 };
 
 export const useUpdateForm = (id: string | undefined) => {
@@ -26,7 +26,7 @@ export const useUpdateForm = (id: string | undefined) => {
     Address: "",
     City: "",
     UserType: "",
-    CreatedDate: "",
+    CreatedDate: undefined,
   });
 
   const [formData, setFormData] = useState<Data>({
@@ -36,7 +36,7 @@ export const useUpdateForm = (id: string | undefined) => {
     Address: "",
     City: "",
     UserType: "",
-    CreatedDate: "",
+    CreatedDate: undefined,
   });
 
   const navigate = useNavigate();
@@ -65,11 +65,9 @@ export const useUpdateForm = (id: string | undefined) => {
   const isFormChanged = useMemo(() => {
     const originalValues = {
       ...original,
-      CreatedDate: new Date(original.CreatedDate).toString(),
     };
     const formDataValues = {
       ...formData,
-      CreatedDate: new Date(formData.CreatedDate).toString(),
     };
     return JSON.stringify(originalValues) !== JSON.stringify(formDataValues);
   }, [original, formData]);

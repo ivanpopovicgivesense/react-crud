@@ -132,7 +132,7 @@ export const UpdateUserForm: React.FC = () => {
                 <Input
                   type="date"
                   name="CreatedDate"
-                  value={formData.CreatedDate || ""}
+                  value={formData.CreatedDate?.toString() || ""}
                   onBlur={() => setTouched({ ...touched, CreatedDate: true })}
                   onChange={(e) => {
                     setFormData({

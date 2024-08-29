@@ -17,10 +17,10 @@ type UserTableProps = {
   onChangeSelectedItem: (row: string) => void;
 };
 
-export const dateFormatter = (date: Date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDay();
+export const dateFormatter = (date: Date | undefined) => {
+  const year = new Date(date!).getFullYear();
+  const month = new Date(date!).getMonth() + 1;
+  const day = new Date(date!).getDate();
 
   return `${day}.${month}.${year}`;
 };
@@ -107,7 +107,7 @@ const UserTable: React.FC<UserTableProps> = React.memo(
                   </TableCell>
                   <TableCell>
                     <TableCellLayout>
-                      {dateFormatter(new Date(CreatedDate))}
+                      {dateFormatter(CreatedDate)}
                     </TableCellLayout>
                   </TableCell>
                   <TableCell>

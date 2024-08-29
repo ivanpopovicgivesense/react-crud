@@ -15,7 +15,7 @@ export type Data = {
   Name: string;
   Surname: string;
   UserType: string;
-  CreatedDate: string;
+  CreatedDate: Date | undefined;
   City: string;
   Address: string;
 };
