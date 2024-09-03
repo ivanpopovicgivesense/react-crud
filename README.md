@@ -9,7 +9,7 @@ Welcome to the React CRUD App project! This application is designed to demonstra
 
 - **User Management:** Effortlessly add, update, delete, and view user information directly from an intuitive table interface.
 - **Selection Capabilities:** Select or deselect multiple users with ease for batch operations.
-- **Sidebar Navigation:** Navigate through different sections using a responsive sidebar, including pages for Calendar, Settings, and Logout.
+- **Sidebar Navigation:** Navigate through different sections using a responsive sidebar, including pages for Calendar and Logout.
 - **Modern UI:** Enjoy a sleek and modern user experience, powered by Fluent UI components.
 
 ***
