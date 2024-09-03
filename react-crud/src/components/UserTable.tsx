@@ -62,9 +62,6 @@ const UserTable: React.FC<UserTableProps> = React.memo(
                 style={{ textAlign: "center" }}
               ></TableHeaderCell>
               <TableHeaderCell style={{ textAlign: "center" }}>
-                <strong>ID</strong>
-              </TableHeaderCell>
-              <TableHeaderCell style={{ textAlign: "center" }}>
                 <strong>Name</strong>
               </TableHeaderCell>
               <TableHeaderCell style={{ textAlign: "center" }}>
@@ -106,9 +103,6 @@ const UserTable: React.FC<UserTableProps> = React.memo(
                 >
                   <TableCell>
                     <Checkbox checked={id === selectedItem} shape="circular" />
-                  </TableCell>
-                  <TableCell>
-                    <TableCellLayout>{id}</TableCellLayout>
                   </TableCell>
                   <TableCell>
                     <TableCellLayout>{Name}</TableCellLayout>

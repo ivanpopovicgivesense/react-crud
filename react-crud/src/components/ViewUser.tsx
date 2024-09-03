@@ -32,7 +32,6 @@ const ViewUserDialog: React.FC<ViewUserDialogueProps> = ({ data }) => {
         <DialogBody>
           <DialogTitle>User Information</DialogTitle>
           <DialogContent>
-            <h3>ID: {data.id}</h3>
             <h3>Name: {data.Name}</h3>
             <h3>Surname: {data.Surname}</h3>
             <h3>User Type: {data.UserType}</h3>
