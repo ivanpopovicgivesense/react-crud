@@ -5,7 +5,7 @@ import { UpdateUserForm } from "../pages/UpdateUserForm";
 import LayoutComponent from "./components/LayoutComponent";
 import MyComponent from "../App";
 import CalendarComponent from "../pages/Calendar";
-import LogoutComponent from "../components/Logout";
+import LogoutComponent from "../pages/Logout";
 
 export const App = () => (
   <Routes>
