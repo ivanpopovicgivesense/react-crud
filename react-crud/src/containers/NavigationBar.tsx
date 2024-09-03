@@ -3,7 +3,6 @@ import { Text, makeStyles } from "@fluentui/react-components";
 import {
   HomeRegular,
   CalendarRegular,
-  SettingsRegular,
   SignOutRegular,
 } from "@fluentui/react-icons";
 import { useNavigate } from "react-router-dom";
@@ -63,7 +62,6 @@ const sidebarItems = [
     icon: <CalendarRegular />,
     text: "Calendar",
   },
-  { key: "settings", icon: <SettingsRegular />, text: "Settings" },
 ];
 
 const NavigationBar = () => {
@@ -91,7 +89,7 @@ const NavigationBar = () => {
         </div>
       ))}
       <div className={classes.separator} />
-      <div className={classes.logout}>
+      <div className={classes.logout} onClick={() => navigate("logout")}>
         <SignOutRegular />
         <Text>Log Out</Text>
       </div>
