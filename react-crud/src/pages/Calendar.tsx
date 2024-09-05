@@ -37,7 +37,10 @@ const CalendarComponent: React.FC = () => {
           border: "1px solid #dcdcdc",
         }}
       >
-        <Calendar showGoToToday={false}></Calendar>
+        <Calendar
+          showGoToToday={false}
+          highlightSelectedMonth={true}
+        ></Calendar>
       </div>
     </div>
   );
